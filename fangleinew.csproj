@@ -104,6 +104,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="NavigationViewSettingsCommands.cs" />
+    <Compile Include="NavigationItemModel.cs" />
+    <Compile Include="NavigationContentTemplateSelector.cs" />
+    <Compile Include="MainViewModel.cs" />
+    <Compile Include="settheme.cs" />
+    <Compile Include="SettingsWindowContent.xaml.cs">
+      <DependentUpon>SettingsWindowContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="XmlConfig.cs" />
+    <Compile Include="设置菜单.xaml.cs">
+      <DependentUpon>设置菜单.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Resources.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -116,6 +132,22 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Dictionary1.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsWindowContent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Telerik.Windows.Controls.Navigation.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="设置菜单.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -142,6 +174,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\1.JPG" />
+    <Resource Include="Images\10.jpg" />
+    <Resource Include="Images\11.jpg" />
+    <Resource Include="Images\12.jpg" />
+    <Resource Include="Images\2.JPG" />
+    <Resource Include="Images\3.JPG" />
+    <Resource Include="Images\4.JPG" />
+    <Resource Include="Images\5.JPG" />
+    <Resource Include="Images\6.JPG" />
+    <Resource Include="Images\7.jpg" />
+    <Resource Include="Images\8.jpg" />
+    <Resource Include="Images\9.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
