@@ -23,16 +23,15 @@ namespace fangleinew
                 settingsDialog.Content = new SettingsWindowContent();
                 settingsDialog.ResizeMode = ResizeMode.CanResizeWithGrip;
                 settingsDialog.Header = "设置";
-                settingsDialog.Owner = App.Current.MainWindow;
+                settingsDialog.Owner = Application.Current.MainWindow;
                 settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 settingsDialog.HideMinimizeButton = false;
                 settingsDialog.HideMaximizeButton = false;
                 settingsDialog.CanClose = true;
                 Settheme settheme1 = new Settheme();
-                MainWindow mw = settingsDialog.Owner as MainWindow;
+                //MainWindow mw = settingsDialog.Owner as MainWindow;
                 ////settheme1.setTheme(this, settheme1.setLightOrDark("Crystal"));
-                settheme1.setTheme(settingsDialog, settheme1.setLightOrDark(mw.StrTheme));
-                settingsDialog.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
+
                 settingsDialog.ShowDialog();
             }
 

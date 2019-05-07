@@ -30,6 +30,23 @@ namespace fangleinew
                 element.Resources.MergedDictionaries.Add(resourceDictionary);
             }
         }
+        public void setTheme( string themeName)
+        {
+            string[] array = ((IEnumerable<string>)defaultReferencesNamesForApplication).ToArray<string>();
+            Application.Current.Resources.MergedDictionaries.Except<ResourceDictionary>(cachedResourceDictionaries.Where<KeyValuePair<string, ResourceDictionary>>((Func<KeyValuePair<string, ResourceDictionary>, bool>)(keyValuePair => keyValuePair.Key.Contains("Telerik.Windows.Themes."))).Select<KeyValuePair<string, ResourceDictionary>, ResourceDictionary>((Func<KeyValuePair<string, ResourceDictionary>, ResourceDictionary>)(keyValuePair => keyValuePair.Value))).ToList<ResourceDictionary>();
+            Application.Current.Resources.MergedDictionaries.Clear();
+            foreach (string str1 in array)
+            {
+                char[] chArray = new char[1] { ',' };
+                string str2 = str1.Split(chArray)[0].ToLower(CultureInfo.InvariantCulture) + ".xaml";
+                Uri uri = new Uri("/Telerik.Windows.Themes." + themeName + ";component/themes/" + str2, UriKind.RelativeOrAbsolute);
+                ResourceDictionary resourceDictionary = new ResourceDictionary()
+                {
+                    Source = uri
+                };
+                Application.Current.Resources.MergedDictionaries.Add(resourceDictionary);
+            }
+        }
         public string setLightOrDark(string themeName)
         {
             if (themeName.Contains("Office2013"))
@@ -93,15 +110,17 @@ namespace fangleinew
                 }
                 return "Fluent";
             }
-            if (!themeName.Contains("Crystal"))
-              switch (themeName)
+            if (themeName.Contains("Crystal"))
             {
-                case "Crystal_Dark":
+                if (themeName.Contains("Crystal_Dark"))
+                {
                     CrystalPalette.LoadPreset(CrystalPalette.ColorVariation.Dark);
-                    break;
-                default:
+                }
+                else
+                {
                     CrystalPalette.LoadPreset(CrystalPalette.ColorVariation.Light);
-                    break;
+                }
+                return "Crystal";
             }
             return "Crystal";
         }
@@ -135,8 +154,8 @@ namespace fangleinew
             //"Telerik.Windows.Controls.FixedDocumentViewersUI",
             //"Telerik.Windows.Controls.GanttView",
             //"Telerik.Windows.Controls.GridView",
-            //"Telerik.Windows.Controls.ImageEditor",
-            //"Telerik.Windows.Controls.Input",
+            "Telerik.Windows.Controls.ImageEditor",
+            "Telerik.Windows.Controls.Input",
         };
     }
 }

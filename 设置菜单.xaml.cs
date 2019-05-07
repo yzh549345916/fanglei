@@ -5,6 +5,7 @@ using Telerik.Windows;
 using System.Windows;
 using System;
 using System.Windows.Media;
+using Telerik.Windows.Controls.RadialMenu;
 
 namespace fangleinew
 {
@@ -20,10 +21,12 @@ namespace fangleinew
         private void OnRadRadialMenuNavigated(object sender, RadRoutedEventArgs e)
         {
             this.CloseAllRadWindows();
+           
         }
 
         private void OnRadRadialMenuItemClick(object sender, RadRoutedEventArgs e)
         {
+            
             this.CloseAllRadWindows();
         }
 
@@ -41,40 +44,39 @@ namespace fangleinew
         private void Fluent_Dark_Click(object sender, RadRoutedEventArgs e)
         {
             Settheme settheme1 = new Settheme();
-            ////settheme1.setTheme(this, settheme1.setLightOrDark("Crystal"));
+            RadWindow rw = GetParentObject<RadWindow>(this, "");
+            MainWindow mw = rw.Owner.Content as MainWindow;
+            settheme1.setTheme(settheme1.setLightOrDark("Fluent_Dark"));
+            StyleManager.SetTheme(mw, new Office2016Theme());
             
-            RadWindow rw =GetParentObject<RadWindow>(this, "");
-            settheme1.setTheme(rw.Owner, settheme1.setLightOrDark("Fluent_Dark"));
-            MainWindow mw = rw.Owner as MainWindow;
-            mw.StrTheme = "Fluent_Dark";
-            rw.Owner.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
-            settheme1 = new Settheme();
-            settheme1.setTheme(rw, settheme1.setLightOrDark("Fluent_Dark"));
-            rw.Owner.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
         }
         private void Fluent_Light_Click(object sender, RadRoutedEventArgs e)
         {
             Settheme settheme1 = new Settheme();
             RadWindow rw = GetParentObject<RadWindow>(this, "");
-            settheme1.setTheme(rw.Owner, settheme1.setLightOrDark("Fluent"));
-            MainWindow mw = rw.Owner as MainWindow;
-            mw.StrTheme = "Fluent";
-            rw.Owner.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
-            settheme1 = new Settheme();
-            settheme1.setTheme(rw, settheme1.setLightOrDark("Fluent"));
-            rw.Owner.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
+            MainWindow mw = rw.Owner.Content as MainWindow;
+            StyleManager.SetTheme(mw, new FluentTheme());
+            settheme1.setTheme(settheme1.setLightOrDark(" Fluent_Light"));
+
+
         }
         private void Crystal_Light_Click(object sender, RadRoutedEventArgs e)
         {
             Settheme settheme1 = new Settheme();
             RadWindow rw = GetParentObject<RadWindow>(this, "");
-            settheme1.setTheme(rw.Owner, settheme1.setLightOrDark("Crystal"));
-            MainWindow mw = rw.Owner as MainWindow;
-            mw.StrTheme = "Crystal";
-            rw.Owner.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
-            settheme1 = new Settheme();
-            settheme1.setTheme(rw, settheme1.setLightOrDark("Crystal"));
-            rw.Owner.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
+            MainWindow mw = rw.Owner.Content as MainWindow;
+            settheme1.setTheme(settheme1.setLightOrDark(" Crystal_Light"));
+            StyleManager.SetTheme(mw, new CrystalTheme());
+           
+        }
+        private void Crystal_Dark_Click(object sender, RadRoutedEventArgs e)
+        {
+            Settheme settheme1 = new Settheme();
+            RadWindow rw = GetParentObject<RadWindow>(this, "");
+            MainWindow mw = rw.Owner.Content as MainWindow;
+            settheme1.setTheme(settheme1.setLightOrDark(" Crystal_Dark"));
+            StyleManager.SetTheme(mw, new CrystalTheme());
+
         }
         /// <summary>
         /// 查找父控件
@@ -86,7 +88,6 @@ namespace fangleinew
         public static T GetParentObject<T>(DependencyObject obj, string name) where T : FrameworkElement
         {
             DependencyObject parent = VisualTreeHelper.GetParent(obj);
-
             while (parent != null)
             {
                 if (parent is T )
@@ -99,6 +100,14 @@ namespace fangleinew
             }
 
             return null;
+        }
+
+        private void RadRadialMenuItem_Click(object sender, RadRoutedEventArgs e)
+        {
+            RadRadialMenuItem rad = sender as RadRadialMenuItem;
+            NavigateContext context = new NavigateContext(rad);
+            rrm.CommandService.ExecuteCommand(Telerik.Windows.Controls.RadialMenu.Commands.CommandId.NavigateToView, context);
+
         }
     }
 }
