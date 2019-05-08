@@ -21,14 +21,14 @@ namespace fangleinew
             {
                 RadWindow settingsDialog = new RadWindow();
                 settingsDialog.Content = new SettingsWindowContent();
-                settingsDialog.ResizeMode = ResizeMode.CanResizeWithGrip;
+                settingsDialog.ResizeMode = ResizeMode.CanResize;
                 settingsDialog.Header = "设置";
                 settingsDialog.Owner = Application.Current.MainWindow;
                 settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 settingsDialog.HideMinimizeButton = false;
                 settingsDialog.HideMaximizeButton = false;
                 settingsDialog.CanClose = true;
-                Settheme settheme1 = new Settheme();
+               // Settheme settheme1 = new Settheme();
                 //MainWindow mw = settingsDialog.Owner as MainWindow;
                 ////settheme1.setTheme(this, settheme1.setLightOrDark("Crystal"));
 

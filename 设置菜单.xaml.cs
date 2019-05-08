@@ -6,6 +6,7 @@ using System.Windows;
 using System;
 using System.Windows.Media;
 using Telerik.Windows.Controls.RadialMenu;
+using Config;
 
 namespace fangleinew
 {
@@ -14,6 +15,7 @@ namespace fangleinew
     /// </summary>
     public partial class 设置菜单 : UserControl
     {
+        string strTheme = "";
         public 设置菜单()
         {
             InitializeComponent();
@@ -41,43 +43,106 @@ namespace fangleinew
             RadWindowManager.Current.GetWindows().Skip(1).ToList().ForEach(w => w.Close());
         }
 
-        private void Fluent_Dark_Click(object sender, RadRoutedEventArgs e)
+       
+        private void Theme_Click(object sender, RadRoutedEventArgs e)
         {
+            RadRadialMenuItem r1 = sender as RadRadialMenuItem;
+            string name = r1.Name;
+            strTheme = name;
             Settheme settheme1 = new Settheme();
             RadWindow rw = GetParentObject<RadWindow>(this, "");
             MainWindow mw = rw.Owner.Content as MainWindow;
-            settheme1.setTheme(settheme1.setLightOrDark("Fluent_Dark"));
-            StyleManager.SetTheme(mw, new Office2016Theme());
-            
-        }
-        private void Fluent_Light_Click(object sender, RadRoutedEventArgs e)
-        {
-            Settheme settheme1 = new Settheme();
-            RadWindow rw = GetParentObject<RadWindow>(this, "");
-            MainWindow mw = rw.Owner.Content as MainWindow;
-            StyleManager.SetTheme(mw, new FluentTheme());
-            settheme1.setTheme(settheme1.setLightOrDark(" Fluent_Light"));
+            StyleManager.SetTheme(mw, GetMyTheme(name));
+            settheme1.setTheme(settheme1.setLightOrDark(name));
 
 
         }
-        private void Crystal_Light_Click(object sender, RadRoutedEventArgs e)
+        private void SaveBtu_Click(object sender, RoutedEventArgs e)
         {
-            Settheme settheme1 = new Settheme();
+            XmlConfig xmlConfig = new XmlConfig(Environment.CurrentDirectory + @"\config\设置.xml");
+            xmlConfig.Write(strTheme, "Theme");
             RadWindow rw = GetParentObject<RadWindow>(this, "");
-            MainWindow mw = rw.Owner.Content as MainWindow;
-            settheme1.setTheme(settheme1.setLightOrDark(" Crystal_Light"));
-            StyleManager.SetTheme(mw, new CrystalTheme());
-           
+            rw.Close();
         }
-        private void Crystal_Dark_Click(object sender, RadRoutedEventArgs e)
+        public Theme GetMyTheme(string name)
         {
-            Settheme settheme1 = new Settheme();
-            RadWindow rw = GetParentObject<RadWindow>(this, "");
-            MainWindow mw = rw.Owner.Content as MainWindow;
-            settheme1.setTheme(settheme1.setLightOrDark(" Crystal_Dark"));
-            StyleManager.SetTheme(mw, new CrystalTheme());
+            string myName = name.ToLower();
+            if(myName.Contains("crystal"))
+            {
+                return  new CrystalTheme();
+            }
+            else if (myName.Contains("fluent"))
+            {
+                return new FluentTheme();
+            }
+            else if (myName.Contains("material"))
+            {
+                return new MaterialTheme();
+            }
+            else if (myName.Contains("office2016touch"))
+            {
+                return new Office2016TouchTheme();
+            }
+            else if (myName.Contains("office2016"))
+            {
+                return new Office2016Theme();
+            }
+            else if (myName.Contains("green"))
+            {
+                return new GreenTheme();
+            }
+            else if (myName.Contains("office2013"))
+            {
+                return new Office2013Theme();
+            }
+            else if (myName.Contains("visualstudio2013"))
+            {
+                return new VisualStudio2013Theme();
+            }
+            else if (myName.Contains("windows8touch"))
+            {
+                return new Windows8TouchTheme();
+            }
+            else if (myName.Contains("windows8"))
+            {
+                return new Windows8Theme();
+            }
+            else if (myName.Contains("office_black"))
+            {
+                return new Office_BlackTheme();
+            }
+            else if (myName.Contains("office_blue"))
+            {
+                return new Office_BlueTheme();
+            }
+            else if (myName.Contains("office_silver"))
+            {
+                return new Office_SilverTheme();
+            }
+            else if (myName.Contains("summer"))
+            {
+                return new SummerTheme();
+            }
+            else if (myName.Contains("vista"))
+            {
+                return new VistaTheme();
+            }
+            else if (myName.Contains("transparent"))
+            {
+                return new TransparentTheme();
+            }
+            else if (myName.Contains("windows7"))
+            {
+                return new Windows7Theme();
+            }
+            else if (myName.Contains("expression_dark"))
+            {
+                return new Expression_DarkTheme();
+            }
+            return new CrystalTheme();
+        }
 
-        }
+      
         /// <summary>
         /// 查找父控件
         /// </summary>
@@ -108,6 +173,20 @@ namespace fangleinew
             NavigateContext context = new NavigateContext(rad);
             rrm.CommandService.ExecuteCommand(Telerik.Windows.Controls.RadialMenu.Commands.CommandId.NavigateToView, context);
 
+        }
+
+        private void CancelBtu_Click(object sender, RoutedEventArgs e)
+        {
+
+            XmlConfig xmlConfig = new XmlConfig(Environment.CurrentDirectory + @"\config\设置.xml");
+            string theme = xmlConfig.Read("Theme");
+            Settheme settheme1 = new Settheme();
+            RadWindow rw = GetParentObject<RadWindow>(this, "");
+            MainWindow mw = rw.Owner.Content as MainWindow;
+            StyleManager.SetTheme(mw, GetMyTheme(theme));
+            settheme1.setTheme(settheme1.setLightOrDark(theme));
+            
+            rw.Close();
         }
     }
 }

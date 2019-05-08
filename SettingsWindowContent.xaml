@@ -1,7 +1,10 @@
 ﻿<UserControl x:Class="fangleinew.SettingsWindowContent"
              xmlns:fangleinew="clr-namespace:fangleinew"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" >
-    <Viewbox Height="310" Width="352">
-        <fangleinew:设置菜单></fangleinew:设置菜单>
+
+    <Viewbox Height="483" Width="486" Margin="20,70,20,20">
+        <StackPanel>
+            <fangleinew:设置菜单></fangleinew:设置菜单>
+        </StackPanel>
     </Viewbox>
 </UserControl>

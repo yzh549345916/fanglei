@@ -122,7 +122,7 @@ namespace fangleinew
                 }
                 return "Crystal";
             }
-            return "Crystal";
+            return themeName;
         }
         private static readonly string[] defaultReferencesNamesForApplication = new string[]
         {
