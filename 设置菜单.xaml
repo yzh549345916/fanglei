@@ -3,13 +3,14 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:fangleinew="clr-namespace:fangleinew"
     mc:Ignorable="d"
     xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation">
 
     <Border x:Name="LayoutRoot" >
         
         <StackPanel>
-            <telerik:RadRadialMenu x:Name="rrm" Height="272" Width="272" IsOpen="True" StartAngle="0"  InnerNavigationRadiusFactor="0.9" InnerRadiusFactor="0.45">
+            <telerik:RadRadialMenu x:Name="rrm"  Height="272" Width="272" IsOpen="True" StartAngle="0"  InnerNavigationRadiusFactor="0.9" InnerRadiusFactor="0.45">
                 <telerik:RadRadialMenuItem Header="暗主题设置" GroupName="SettingTheme" ToolTipContent="设置深色主题"  Click="RadRadialMenuItem_Click">
                     <telerik:RadRadialMenuItem.IconContent>
                         <Path Data="M645.2,344.6C635.5,334.9 621.5,330.8 607.9,333.7 601.4,335.1 595.5,337.8 590.4,341.9 569.3,358.8 542.8,368.1 515.8,368.1L515,368.1C514.2,368.1,513.4,368,512.6,368L511.4,368C510.6,368,509.8,368.1,509,368.1L508.2,368.1C481.2,368.1 454.6,358.8 433.5,341.9 428.4,337.8 422.5,335.1 416,333.7 402.3,330.8 388.4,334.9 378.7,344.6L311.9,411.4C304.4,418.9,300.1,429.2,300,439.8L300,442.4C300.6,453.4 305.6,463.8 313.9,471.1 327.7,483.1 342.8,493.9 358.7,503.2 361.6,504.9 363.3,507.9 363.3,511.1L363.3,632.9C363.3,654.1 377.7,672.5 398.4,677.7 434,686.7 470.8,691.2 507.7,691.2L511.7,691.2C550.5,691.5 588.6,687 625.5,677.7 646.1,672.5 660.6,654.1 660.6,632.9L660.6,511.1C660.6,507.8 662.3,504.8 665.2,503.2 681.1,494 696.1,483.2 710,471.1 718.2,464 723.2,453.7 723.9,442.9 724,441.8 724,440.7 724,439.6 723.8,429.1 719.5,418.9 712.1,411.5L645.2,344.6z M641.5,462.4C624.2,472.5,613.4,491.2,613.4,511.1L613.4,632.1C580.6,640.3 546.7,644.4 511.7,644 477.4,644.4 443.2,640.3 410.4,632.1L410.4,511.1C410.4,491.1 399.6,472.5 382.3,462.4 371,455.8 360.1,448.3 350,439.9L408,381.9C436.7,403.4 472.1,415.2 508,415.2 509.2,415.2 510.4,415.1 511.5,415.1L511.9,415.1C513.1,415.2 514.3,415.2 515.4,415.2 551.4,415.2 586.7,403.4 615.4,381.9L673.4,439.9C663.7,448.3,652.9,455.8,641.5,462.4z M736.8,64.7L287.2,64.7C175,64.7,83.8,155.9,83.8,268.1L83.8,756C83.8,868.1,175,959.4,287.2,959.4L736.9,959.4C849,959.4,940.3,868.2,940.3,756L940.3,268.1C940.2,155.9,849,64.7,736.8,64.7z M886.3,755.9C886.3,838.3,819.3,905.4,736.8,905.4L287.2,905.4C204.8,905.4,137.7,838.4,137.7,755.9L137.7,268.1C137.7,185.7,204.7,118.6,287.2,118.6L736.9,118.6C819.3,118.6,886.4,185.6,886.4,268.1L886.4,755.9z" Fill="#FF1488D8" Height="25" Width="25" Stretch="Fill" Margin="0 0 0 0"/>
@@ -95,8 +96,7 @@
                         </telerik:RadRadialMenuItem.IconContent>
                     </telerik:RadRadialMenuItem>
                 </telerik:RadRadialMenuItem>
-
-
+                
 
             </telerik:RadRadialMenu>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">

@@ -4,6 +4,7 @@
                     xmlns:mat="clr-namespace:Telerik.Windows.Controls.MaterialControls;assembly=Telerik.Windows.Controls"
                     xmlns:telerikNavigation="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls.Navigation"
                     xmlns:telerik1="clr-namespace:Telerik.Windows.Controls;assembly=Telerik.Windows.Controls"
+                    xmlns:gridfc="clr-namespace:表格分层"
                     xmlns:example="clr-namespace:fangleinew">
 
     <DataTemplate x:Key="ContentTemplate">
@@ -71,6 +72,31 @@
             </Grid>
         </ScrollViewer>
     </DataTemplate>
+    <DataTemplate x:Key="JCBGContentTemplate">
+        <ScrollViewer>
+            <Grid Margin="20 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding Title}" FontSize="46"  FontWeight="Medium"/>
+
+                <Grid Margin="0 15 0 0" Grid.Row="1" VerticalAlignment="Top" MinWidth="870"
+                  HorizontalAlignment="Left">
+                    <ItemsControl ItemsSource="{Binding ImagePaths}" Grid.Row="1" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <gridfc:GridJCBG/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </DataTemplate>
 
     <DataTemplate x:Key="ContentTemplateAlternative">
         <ScrollViewer>
@@ -103,7 +129,8 @@
     <example:NavigationContentTemplateSelector x:Key="NavigationContentTemplateSelector" 
                                                        Template="{StaticResource ContentTemplate}"
                                                        ConfigContentTemplate="{StaticResource ConfigContentTemplate}" 
-                                                       TemplateAlternative="{StaticResource ContentTemplateAlternative}"  />
+                                                       TemplateAlternative="{StaticResource ContentTemplateAlternative}" 
+                                                       JCBGContentTemplate="{StaticResource JCBGContentTemplate}" />
 
     <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />
     <Style TargetType="telerik:RadNavigationViewItem" >

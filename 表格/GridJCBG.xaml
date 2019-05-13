@@ -1,0 +1,87 @@
+﻿<UserControl x:Class="表格分层.GridJCBG"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:fangleinew="clr-namespace:fangleinew"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        xmlns:my="clr-namespace:表格分层"
+             mc:Ignorable="d" >
+    <UserControl.Resources>
+        <my:MyGridData x:Key="MyGridData"/>
+    </UserControl.Resources>
+    <Viewbox DataContext="{StaticResource MyGridData}"  Width="1320">
+        <StackPanel>
+            <telerik:RadGridView x:Name="clubsGrid" SelectionChanged="clubsGrid_SelectionChanged"
+							 ItemsSource="{Binding JcbgZbs}"
+							 AutoGenerateColumns="False"   
+                             IsReadOnly="False"
+                             my:GridContextMenuBehavior.ContextMenu="{Binding ElementName=GridContextMenu}"
+							 Margin="0">
+                <telerik:RadContextMenu.ContextMenu>
+                    <telerik:RadContextMenu x:Name="GridContextMenu" IconColumnWidth="18">
+                        <telerik:RadContextMenu.Items>
+                            <telerik:RadMenuItem Header="新增">
+                                <telerik:RadMenuItem.Icon>
+                                    <telerik:RadGlyph Glyph="&#xe65b;" FontSize="15" Foreground="#FF0971B9"  />
+                                </telerik:RadMenuItem.Icon>
+                            </telerik:RadMenuItem>
+
+                            <telerik:RadMenuItem Header="编辑" />
+                            <telerik:RadMenuItem Header="删除" />
+                        </telerik:RadContextMenu.Items>
+                    </telerik:RadContextMenu>
+                </telerik:RadContextMenu.ContextMenu>
+
+                <telerik:RadGridView.ChildTableDefinitions>
+                    <telerik:GridViewTableDefinition />
+                </telerik:RadGridView.ChildTableDefinitions>
+
+                <telerik:RadGridView.HierarchyChildTemplate>
+                    <DataTemplate>
+                        <telerik:RadGridView Name="playersGrid" 
+										 SelectionChanged="clubsGrid_SelectionChanged"
+										 ItemsSource="{Binding JcbgFbs}" 
+										 AutoGenerateColumns="False">
+                            <telerik:RadGridView.Columns>
+                                <telerik:GridViewDataColumn Header="检测项目" DataMemberBinding="{Binding Name}"/>
+                                <telerik:GridViewDataColumn Header="检测类别" DataMemberBinding="{Binding FenLei}"/>
+                                <telerik:GridViewDataColumn Header="检测日期" DataMemberBinding="{Binding Mydate}" DataFormatString="{}{0:yyyy年MM月dd日}"/>
+                                <telerik:GridViewDataColumn Header="检测人员" DataMemberBinding="{Binding JcPeople}"/>
+                                <telerik:GridViewDataColumn Header="校核人员" DataMemberBinding="{Binding JhPeople}"/>
+                                <telerik:GridViewDataColumn Header="批准人员" DataMemberBinding="{Binding PzPeople}"/>
+                            </telerik:RadGridView.Columns>
+                        </telerik:RadGridView>
+                    </DataTemplate>
+                </telerik:RadGridView.HierarchyChildTemplate>
+                <telerik:RadGridView.Columns>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding Zbid}" Header="编号"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding StartDate}"
+											Header="检测开始日期" 
+											DataFormatString="{}{0:yyyy年MM月dd日}"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding EndDate}"
+											Header="检测结束日期" 
+											DataFormatString="{}{0:yyyy年MM月dd日}"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding NextDate}"
+											Header="下次检测日期" 
+											DataFormatString="{}{0:yyyy年MM月dd日}"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding CompanyName}"
+											Header="受检单位" 
+											DataFormatString="{}{0:yyyy年MM月dd日}"/>
+
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding CompanyAddress}" 
+											Header="单位地址" 
+											DataFormatString="{}{0:N0}"/>
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding ContactDepartment}" 
+											Header="联系部门" />
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding ZrPeople}" 
+											Header="负责人" />
+                    <telerik:GridViewDataColumn DataMemberBinding="{Binding TelephoneNumber}" 
+											Header="电话" />
+                </telerik:RadGridView.Columns>
+
+            </telerik:RadGridView>
+        </StackPanel>
+
+    </Viewbox>
+</UserControl>

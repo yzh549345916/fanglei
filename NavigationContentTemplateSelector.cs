@@ -8,17 +8,18 @@ namespace fangleinew
         public DataTemplate Template { get; set; }
         public DataTemplate TemplateAlternative { get; set; }
         public DataTemplate ConfigContentTemplate { get; set; }
+        public DataTemplate JCBGContentTemplate { get; set; }
 
         public override DataTemplate SelectTemplate(object item, DependencyObject container)
         {
             if (item != null)
             {
                 NavigationItemModel model = (NavigationItemModel)item;
-                if(model.Title.Contains("是"))
+                if(model.Title=="检测报告")
                 {
-                    return this.ConfigContentTemplate;
+                    return this.JCBGContentTemplate;
                 }
-                if (!string.IsNullOrEmpty(model.Text))
+                else if (!string.IsNullOrEmpty(model.Text))
                 {
                     return this.TemplateAlternative;
                 }

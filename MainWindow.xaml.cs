@@ -24,19 +24,26 @@ namespace fangleinew
     {
         public MainWindow()
         {
+            //加载中文resouces文件
+            LocalizationManager.Manager = new LocalizationManager()
+            {
+                ResourceManager = GridViewResources.ResourceManager
+            };
             InitializeComponent();
+            //LocalizationManager.DefaultCulture = new CultureInfo("zh-CHS");//zh-cn
             this.DataContext = new MainViewModel();
             XmlConfig xmlConfig = new XmlConfig(Environment.CurrentDirectory + @"\config\设置.xml");
             string theme = xmlConfig.Read("Theme");
             Settheme settheme1 = new Settheme();
             StyleManager.SetTheme(this, GetMyTheme(theme));
             settheme1.setTheme(settheme1.setLightOrDark(theme));
-
+            StyleManager.ApplicationTheme = GetMyTheme(theme);
 
             this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
             // var ss = (Content as DependencyObject);
             //StyleManager.SetTheme(Content as DependencyObject, new CrystalTheme());
         }
+
         public Theme GetMyTheme(string name)
         {
             string myName = name.ToLower();
@@ -119,6 +126,9 @@ namespace fangleinew
             this.Resources.MergedDictionaries.Clear();
             this.Resources.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/fangleinew;component/Resources.xaml", UriKind.RelativeOrAbsolute) });
         }
-        
+
+
+
+
     }
 }

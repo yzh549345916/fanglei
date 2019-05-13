@@ -10,10 +10,12 @@
     <Grid>
 
         <telerik:RadNavigationView x:Name="navigationView" 
+                                   
                                    ItemsSource="{Binding Items}"
                                    SelectedIndex="0">
             <telerik:RadNavigationView.Content>
                 <telerik:RadTransitionControl Content="{Binding SelectedItem, ElementName=navigationView}"
+                                              
                                               ContentTemplateSelector="{DynamicResource NavigationContentTemplateSelector}" 
                                               Duration="0:0:0.4">
                     <telerik:RadTransitionControl.Transition>
@@ -22,14 +24,15 @@
                 </telerik:RadTransitionControl>
             </telerik:RadNavigationView.Content>
             <telerik:RadNavigationView.PaneFooter>
-                <telerik:RadNavigationViewItem Content="设置" 
-                                               
+                <telerik:RadNavigationViewItem x:Name="s1" Content="设置" 
                                                Command="{x:Static  fangleinew:NavigationViewSettingsCommands.OpenSettingsDialogCommand}"
                                                CommandParameter="{Binding ElementName=navigationView}"
                                                IconTemplate="{x:Null}">
                     <telerik:RadNavigationViewItem.Icon>
                         <telerik:RadGlyph Glyph="&#xe13a;" FontSize="20" />
                     </telerik:RadNavigationViewItem.Icon>
+
+
                 </telerik:RadNavigationViewItem>
 
             </telerik:RadNavigationView.PaneFooter>

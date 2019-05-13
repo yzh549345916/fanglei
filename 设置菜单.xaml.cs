@@ -7,6 +7,7 @@ using System;
 using System.Windows.Media;
 using Telerik.Windows.Controls.RadialMenu;
 using Config;
+using System.Windows.Input;
 
 namespace fangleinew
 {
@@ -54,7 +55,7 @@ namespace fangleinew
             MainWindow mw = rw.Owner.Content as MainWindow;
             StyleManager.SetTheme(mw, GetMyTheme(name));
             settheme1.setTheme(settheme1.setLightOrDark(name));
-
+            StyleManager.ApplicationTheme = GetMyTheme(name);
 
         }
         private void SaveBtu_Click(object sender, RoutedEventArgs e)
@@ -172,7 +173,6 @@ namespace fangleinew
             RadRadialMenuItem rad = sender as RadRadialMenuItem;
             NavigateContext context = new NavigateContext(rad);
             rrm.CommandService.ExecuteCommand(Telerik.Windows.Controls.RadialMenu.Commands.CommandId.NavigateToView, context);
-
         }
 
         private void CancelBtu_Click(object sender, RoutedEventArgs e)

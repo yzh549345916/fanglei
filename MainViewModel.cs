@@ -11,7 +11,7 @@ namespace fangleinew
         {
             this.Items = new ObservableCollection<NavigationItemModel>();
 
-            this.Items.Add(CreateItem("杨", "&#xe501;", string.Empty, "Images/1.JPG", "Images/2.JPG", "Images/3.JPG"));
+            this.Items.Add(CreateItem("检测报告", "&#xe303;", string.Empty, "Images/1.JPG"));
             this.Items.Add(CreateItem("泽", "&#xe13d;", string.Empty, "Images/4.JPG", "Images/5.JPG", "Images/6.JPG"));
             this.Items.Add(CreateItem("华", "&#xe500;", string.Empty, "Images/7.JPG", "Images/8.JPG", "Images/9.JPG"));
             this.Items.Add(CreateItem("是", "&#xe303;", string.Empty, @"D:\cx\防雷\防雷\检测报告\设置菜单.xaml"));

@@ -1,0 +1,16 @@
+﻿<telerik:RadRadialMenu x:Class="fangleinew.rightMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+             xmlns:local="clr-namespace:fangleinew"
+             StaysOpenOnShow="True"  PopupPlacement="MousePoint"
+              PopupHorizontalOffset="40"
+            PopupVerticalOffset="20"
+             mc:Ignorable="d" >
+    <telerik:RadRadialMenuItem Header="我" />
+    <telerik:RadRadialMenuItem Header="是" />
+    <telerik:RadRadialMenuItem Header="帅哥" />
+
+</telerik:RadRadialMenu>
