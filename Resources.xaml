@@ -97,7 +97,56 @@
             </Grid>
         </ScrollViewer>
     </DataTemplate>
+    <DataTemplate x:Key="Property1ContentTemplate">
+        <ScrollViewer>
+            <Grid Margin="20 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
 
+                <TextBlock Text="{Binding Title}" FontSize="46"  FontWeight="Medium"/>
+
+                <Grid Margin="0 15 0 0" Grid.Row="1" VerticalAlignment="Top" MinWidth="870"
+                  HorizontalAlignment="Left">
+                    <ItemsControl ItemsSource="{Binding ImagePaths}" Grid.Row="1" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <example:PropertyGrid1/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </DataTemplate>
+    <DataTemplate x:Key="MapContentTemplate">
+        <ScrollViewer>
+            <Grid Margin="20 20 0 0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <TextBlock Text="{Binding Title}" FontSize="46"  FontWeight="Medium"/>
+
+                <Grid Margin="0 15 0 0" Grid.Row="1" VerticalAlignment="Top" MinWidth="870"
+                  HorizontalAlignment="Left">
+                    <ItemsControl ItemsSource="{Binding ImagePaths}" Grid.Row="1" >
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <example:mapUsercontrol/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+
+                </Grid>
+            </Grid>
+        </ScrollViewer>
+    </DataTemplate>
     <DataTemplate x:Key="ContentTemplateAlternative">
         <ScrollViewer>
             <Grid Margin="20 20 0 0">
@@ -130,6 +179,8 @@
                                                        Template="{StaticResource ContentTemplate}"
                                                        ConfigContentTemplate="{StaticResource ConfigContentTemplate}" 
                                                        TemplateAlternative="{StaticResource ContentTemplateAlternative}" 
+                                                       MapContentTemplate="{StaticResource MapContentTemplate}"
+                                                       Property1ContentTemplate="{StaticResource Property1ContentTemplate}"
                                                        JCBGContentTemplate="{StaticResource JCBGContentTemplate}" />
 
     <telerik:StringToGlyphConverter x:Key="StringToGlyphConverter" />

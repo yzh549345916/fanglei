@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="fangleinew.PropertyGrid1"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d"
+             xmlns:local="clr-namespace:fangleinew"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 HorizontalAlignment="Center"
+             MinWidth="500"
+            
+			 VerticalAlignment="Center">
+    
+    <Grid>
+        <Grid.Resources>
+            <local:FileUploadTemplateSelector x:Key="dataTemplateSelector">
+                <local:FileUploadTemplateSelector.OpenFileDialogTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="..." Grid.Column="1" Click="SelectFileClick"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.OpenFileDialogTemplate>
+                <local:FileUploadTemplateSelector.PeopleSelectTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="peopleAdd_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.PeopleSelectTemplate>
+                <local:FileUploadTemplateSelector.BZSelectTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="bzAdd_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.BZSelectTemplate>
+                <local:FileUploadTemplateSelector.NumericPropertyTemplate>
+                    <DataTemplate>
+                        <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="0.1" />
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.NumericPropertyTemplate>
+                <local:FileUploadTemplateSelector.NumIntPropertyTemplate>
+                <DataTemplate>
+                    <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="1" />
+                </DataTemplate>
+                </local:FileUploadTemplateSelector.NumIntPropertyTemplate>
+
+            </local:FileUploadTemplateSelector>
+        </Grid.Resources>
+        <telerik:RadPropertyGrid MaxHeight="600" x:Name="rpg" IsGrouped="True" RenderMode="Flat" EditMode="Single" EditorTemplateSelector="{StaticResource dataTemplateSelector}" EditEnded="PropertyGrid1_EditEnded"/>
+    </Grid>
+</UserControl>

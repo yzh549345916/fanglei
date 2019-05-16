@@ -13,11 +13,13 @@
     <Viewbox DataContext="{StaticResource MyGridData}"  Width="1320">
         <StackPanel>
             <telerik:RadGridView x:Name="clubsGrid" SelectionChanged="clubsGrid_SelectionChanged"
-							 ItemsSource="{Binding JcbgZbs}"
+							 
 							 AutoGenerateColumns="False"   
                              IsReadOnly="False"
+                             ItemsSource="{Binding JcbgZbs}"
                              my:GridContextMenuBehavior.ContextMenu="{Binding ElementName=GridContextMenu}"
 							 Margin="0">
+             
                 <telerik:RadContextMenu.ContextMenu>
                     <telerik:RadContextMenu x:Name="GridContextMenu" IconColumnWidth="18">
                         <telerik:RadContextMenu.Items>
@@ -81,6 +83,7 @@
                 </telerik:RadGridView.Columns>
 
             </telerik:RadGridView>
+
         </StackPanel>
 
     </Viewbox>
