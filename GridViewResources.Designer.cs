@@ -11210,7 +11210,7 @@ namespace fangleinew {
         }
         
         /// <summary>
-        ///   查找类似 清楚筛选 的本地化字符串。
+        ///   查找类似 清除筛选 的本地化字符串。
         /// </summary>
         internal static string GridViewClearFilter {
             get {
@@ -13568,7 +13568,7 @@ namespace fangleinew {
         }
         
         /// <summary>
-        ///   查找类似 清楚筛选 的本地化字符串。
+        ///   查找类似 清除筛选 的本地化字符串。
         /// </summary>
         internal static string PivotFieldList_ClearFilter {
             get {

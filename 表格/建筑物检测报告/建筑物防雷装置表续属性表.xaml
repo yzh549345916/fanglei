@@ -1,0 +1,112 @@
+﻿<UserControl x:Class="fangleinew.建筑物防雷装置表续属性表"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d"
+             xmlns:local="clr-namespace:fangleinew"
+			 xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+			 HorizontalAlignment="Center"
+             MinWidth="500"
+            
+			 VerticalAlignment="Center">
+    
+    <Grid>
+        <Grid.Resources>
+            <local:FileUploadTemplateSelector x:Key="dataTemplateSelector">
+                <local:FileUploadTemplateSelector.OpenFileDialogTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="..." Grid.Column="1" Click="SelectFileClick"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.OpenFileDialogTemplate>
+                <local:FileUploadTemplateSelector.PeopleSelectTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="peopleAdd_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.PeopleSelectTemplate>
+                <local:FileUploadTemplateSelector.NumericPropertyTemplate>
+                    <DataTemplate>
+                        <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="0.1" />
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.NumericPropertyTemplate>
+                <local:FileUploadTemplateSelector.NumIntPropertyTemplate>
+                <DataTemplate>
+                    <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="1" />
+                </DataTemplate>
+                </local:FileUploadTemplateSelector.NumIntPropertyTemplate>
+                <local:FileUploadTemplateSelector.YQSelectTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="YQAdd_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.YQSelectTemplate>
+                <local:FileUploadTemplateSelector.zhPJTemplate>
+                    <DataTemplate>
+                        <Grid>
+
+
+                            <TextBox MaxWidth="300"  telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" TextWrapping="Wrap" />
+                           
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.zhPJTemplate>
+
+            </local:FileUploadTemplateSelector>
+        </Grid.Resources>
+        <StackPanel>
+            <telerik:RadPropertyGrid  MaxHeight="600" x:Name="rpg"  IsGrouped="True" RenderMode="Flat" EditMode="Single" EditorTemplateSelector="{StaticResource dataTemplateSelector}" EditEnded="PropertyGrid1_EditEnded"/>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <StackPanel >
+                    <telerik:Label  FontWeight="Bold" Content="保存" Margin="0,10,0,0"/>
+                    <telerik:RadPathButton x:Name="saveBtu" Margin="0 0 0 10"
+                                       Width="30"
+					                   Height="30"
+					                   HorizontalAlignment="Center" Padding="0"
+		                               PathGeometry="M0,1024L0,0 768,0 1024,256 1024,1024 0,1024z M597.333333,85.333333L256,85.333333 256,256 597.333333,256 597.333333,85.333333z M938.666667,256L768,85.333333 682.666667,85.333333 682.666667,341.333333 170.666667,341.333333 170.666667,85.333333 85.333333,85.333333 85.333333,938.666667 938.666667,938.666667 938.666667,256z M853.333333,768L512,768 512,682.666667 853.333333,682.666667 853.333333,768z" Background="{x:Null}" BorderBrush="{x:Null}" Click="SaveBtu_Click" >
+                        <telerik:RadPathButton.PathStyle>
+                            <Style TargetType="Path">
+                                <Setter Property="Fill" Value="#FF1488D8" />
+                                <Setter Property="Stretch" Value="Fill" />
+                            </Style>
+                        </telerik:RadPathButton.PathStyle>
+                    </telerik:RadPathButton>
+                </StackPanel>
+                <StackPanel Margin="40,0,0,0" HorizontalAlignment="Right" >
+                    <telerik:Label  FontWeight="Bold" Content="取消" Margin="0,10,0,0"/>
+                    <telerik:RadPathButton x:Name="cancelBtu" Margin="0 0 0 0"
+                                       Width="30"
+					                   Height="30"
+					                   HorizontalAlignment="Center" Padding="0"
+		                               PathGeometry="M750.933333,54.613333L750.933333,273.066667 273.066667,273.066667 273.066667,54.613333A150.186667,150.186667,0,0,0,122.88,204.8L122.88,819.2A150.186667,150.186667,0,0,0,273.066667,969.386667L750.933333,969.386667A150.186667,150.186667,0,0,0,901.12,819.2L901.12,204.8A150.186667,150.186667,0,0,0,750.933333,54.613333z M468.036267,614.4L358.126933,504.490667C349.525333,495.889067 351.163733,480.256 361.8816,469.6064 372.5312,458.888533 388.096,457.250133 396.6976,465.851733L506.606933,575.761067 616.584533,465.851733C625.186133,457.250133 640.8192,458.888533 651.4688,469.6064 662.1184,480.256 663.7568,495.889067 655.223467,504.4224L545.314133,614.4 655.223467,724.309333C663.825067,732.910933 662.1184,748.544 651.4688,759.1936 640.8192,769.911467 625.186133,771.549867 616.6528,762.948267L506.6752,653.038933 396.765867,762.948267C388.096,771.549867 372.5312,769.911467 361.8816,759.1936 351.163733,748.544 349.525333,732.910933 358.126933,724.3776L468.036267,614.4z M327.68,54.613333L327.68,218.453333 696.32,218.453333 696.32,54.613333 327.68,54.613333z M955.733333,204.8L955.733333,819.2A204.8,204.8,0,0,1,750.933333,1024L273.066667,1024A204.8,204.8,0,0,1,68.266667,819.2L68.266667,204.8A204.8,204.8,0,0,1,273.066667,0L750.933333,0A204.8,204.8,0,0,1,955.733333,204.8z" Background="{x:Null}" BorderBrush="{x:Null}" Click="CancelBtu_Click" >
+                        <telerik:RadPathButton.PathStyle>
+                            <Style TargetType="{x:Type Path}">
+                                <Setter Property="Fill" Value="#FF1488D8" />
+                                <Setter Property="Stretch" Value="Fill" />
+                            </Style>
+                        </telerik:RadPathButton.PathStyle>
+                    </telerik:RadPathButton>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

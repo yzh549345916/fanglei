@@ -29,7 +29,7 @@ namespace 表格分层
         {
             
             InitializeComponent();
-            
+            CSH();
 
         }
         public Theme GetMyTheme(string name)
@@ -108,6 +108,10 @@ namespace 表格分层
                 return new Expression_DarkTheme();
             }
             return new CrystalTheme();
+        }
+        private void CSH()
+        {
+           
         }
         private void clubsGrid_SelectionChanged(object sender, SelectionChangeEventArgs e)
         {

@@ -3829,7 +3829,7 @@
     <value>单击此处插入新元素</value>
   </data>
   <data name="GridViewClearFilter" xml:space="preserve">
-    <value>清楚筛选</value>
+    <value>清除筛选</value>
   </data>
   <data name="GridViewColumnsSelectionButtonTooltip" xml:space="preserve">
     <value>选择列</value>
@@ -4528,7 +4528,7 @@
     <value>删除计算</value>
   </data>
   <data name="PivotFieldList_ClearFilter" xml:space="preserve">
-    <value>清楚筛选</value>
+    <value>清除筛选</value>
   </data>
   <data name="PivotFieldList_ColumnLabels" xml:space="preserve">
     <value>列标签</value>

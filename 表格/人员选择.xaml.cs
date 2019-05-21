@@ -31,6 +31,21 @@ namespace fangleinew
                 xcb1.Items.Add(ss);
             }
         }
+        public 人员选择(string lb)
+        {
+            InitializeComponent();
+            数据库处理类 sjkcl = new 数据库处理类();
+            
+            string people = sjkcl.getPeopleByLB(lb);
+            if(people.Length>0)
+            {
+                foreach (string ss in people.Split(','))
+                {
+                    xcb1.Items.Add(ss);
+                }
+            }
+            
+        }
 
         private void OKBtu_Click(object sender, RoutedEventArgs e)
         {

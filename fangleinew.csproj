@@ -171,16 +171,29 @@
     <Compile Include="NavigationItemModel.cs" />
     <Compile Include="NavigationContentTemplateSelector.cs" />
     <Compile Include="MainViewModel.cs" />
-    <Compile Include="表格\PropertyGrid1.xaml.cs">
+    <Compile Include="表格\建筑物检测报告\建筑物防雷装置表续要素.cs" />
+    <Compile Include="表格\建筑物检测报告\建筑物防雷装置检测表续选择.xaml.cs">
+      <DependentUpon>建筑物防雷装置检测表续选择.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="表格\仪器选择.xaml.cs">
+      <DependentUpon>仪器选择.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="表格\建筑物检测报告\建筑物防雷装置表续属性表.xaml.cs">
+      <DependentUpon>建筑物防雷装置表续属性表.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="表格\总表属性表.xaml.cs">
+      <DependentUpon>总表属性表.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="表格\建筑物检测报告\PropertyGrid1.xaml.cs">
       <DependentUpon>PropertyGrid1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="表格\PropertyTemplateSelect.cs" />
+    <Compile Include="表格\建筑物检测报告\PropertyTemplateSelect.cs" />
     <Compile Include="settheme.cs" />
     <Compile Include="SettingsWindowContent.xaml.cs">
       <DependentUpon>SettingsWindowContent.xaml</DependentUpon>
     </Compile>
     <Compile Include="XmlConfig.cs" />
-    <Compile Include="表格\标准选择.xaml.cs">
+    <Compile Include="表格\建筑物检测报告\标准选择.xaml.cs">
       <DependentUpon>标准选择.xaml</DependentUpon>
     </Compile>
     <Compile Include="表格\人员选择.xaml.cs">
@@ -189,14 +202,17 @@
     <Compile Include="右键\rightMenu.xaml.cs">
       <DependentUpon>rightMenu.xaml</DependentUpon>
     </Compile>
-    <Compile Include="建筑物防雷装置要素.cs" />
-    <Compile Include="表格\ContextMenuBehavior.cs" />
+    <Compile Include="表格\建筑物检测报告\建筑物防雷装置要素.cs" />
+    <Compile Include="右键\ContextMenuBehavior.cs" />
     <Compile Include="表格\GridJCBG.xaml.cs">
       <DependentUpon>GridJCBG.xaml</DependentUpon>
     </Compile>
+    <Compile Include="表格\报告总表要素.cs" />
+    <Compile Include="表格\数据库处理类.cs" />
     <Compile Include="表格\检测报告分表类.cs" />
     <Compile Include="表格\检测报告总表类.cs" />
     <Compile Include="表格\表格数据.cs" />
+    <Compile Include="表格\表格编号生成.cs" />
     <Compile Include="设置菜单.xaml.cs">
       <DependentUpon>设置菜单.xaml</DependentUpon>
     </Compile>
@@ -204,7 +220,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="表格\PropertyGrid1.xaml">
+    <Page Include="表格\建筑物检测报告\建筑物防雷装置检测表续选择.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="表格\仪器选择.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="表格\建筑物检测报告\建筑物防雷装置表续属性表.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="表格\总表属性表.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="表格\建筑物检测报告\PropertyGrid1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -232,7 +264,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="表格\标准选择.xaml">
+    <Page Include="表格\建筑物检测报告\标准选择.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -282,20 +314,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\1.JPG" />
-    <Resource Include="Images\10.jpg" />
-    <Resource Include="Images\11.jpg" />
-    <Resource Include="Images\12.jpg" />
-    <Resource Include="Images\2.JPG" />
-    <Resource Include="Images\3.JPG" />
-    <Resource Include="Images\4.JPG" />
-    <Resource Include="Images\5.JPG" />
-    <Resource Include="Images\6.JPG" />
-    <Resource Include="Images\7.jpg" />
-    <Resource Include="Images\8.jpg" />
-    <Resource Include="Images\9.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">

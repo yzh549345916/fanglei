@@ -25,18 +25,36 @@ namespace 表格分层
 
                 return this.jcbgZbs;
             }
+            set
+            {
+                if (value != jcbgZbs)
+                {
+                    jcbgZbs = value;
+                    OnPropertyChanged("JcbgZbs");
+                }
+
+            }
         }
 
         public ObservableCollection<检测报告分表类> JcbgFbs
         {
             get
             {
-                if (this.jcbgFbs == null)
-                {
-                    this.jcbgFbs = 检测报告分表类.GetFbs();
-                }
+                //if (this.jcbgFbs == null)
+                //{
+                //    this.jcbgFbs = 检测报告分表类.GetFbs();
+                //}
 
                 return this.jcbgFbs;
+            }
+            set
+            {
+                if (value != jcbgFbs)
+                {
+                    jcbgFbs = value;
+                    OnPropertyChanged("JcbgFbs");
+                }
+
             }
         }
 
