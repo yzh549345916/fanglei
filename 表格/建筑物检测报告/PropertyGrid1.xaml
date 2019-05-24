@@ -86,6 +86,18 @@
                         </Grid>
                     </DataTemplate>
                 </local:FileUploadTemplateSelector.XBSelectTemplate>
+                <local:FileUploadTemplateSelector.SPDSelectTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="spdAdd_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.SPDSelectTemplate>
                 <local:FileUploadTemplateSelector.NumericPropertyTemplate>
                     <DataTemplate>
                         <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="0.1" />

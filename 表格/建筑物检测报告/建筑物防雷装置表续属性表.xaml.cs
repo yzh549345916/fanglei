@@ -81,6 +81,42 @@ namespace fangleinew
                 技术评定=jspd
             };
         }
+
+        public 建筑物防雷装置表续属性表(建筑物防雷装置表续要素 xbys1, 建筑物防雷装置要素 fbys)
+        {
+            InitializeComponent();
+            _fbys = fbys;
+            rpg.AutoGeneratingPropertyDefinition += new EventHandler<Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs>(RpgAutoGeneratingPropertyDefinition);
+            string jspd = "";
+            try
+            {
+                if (fbys.Dxpj1.Trim() == "不符合" || fbys.Jsddxpj.Trim() == "不符合" || fbys.Jswldxpj.Trim() == "不符合")
+                    jspd += "防雷装置不符合《建筑物防雷装置检测技术规范》GB/T21431-2015第5.2.1条要求及《建筑物防雷设计规范》GB50057-2010第4.2.4、4.3.1、4.4.1、5.2的规定。";
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                if (fbys.Jsdxpj.Trim() == "不符合" || fbys.Dyxldxpj.Trim() == "不符合" || fbys.Wmfsdxpj1.Trim() == "不符合" || fbys.Wmfsdxpj2.Trim() == "不符合" || fbys.Wmfsdxpj3.Trim() == "不符合")
+                    jspd += "防雷装置不符合《建筑物防雷装置检测技术规范》GB/T21431-2015第5.2.2条要求及《建筑物防雷设计规范》GB50057-2010第5.2的规定。";
+            }
+            catch
+            {
+            }
+
+            try
+            {
+                if (fbys.Yxxdxpj.Trim() == "不符合")
+                    jspd += "防雷装置不符合《建筑物防雷装置检测技术规范》GB/T21431-2015第5.3.1条要求及《建筑物防雷设计规范》GB50057-2010第5.3的规定。";
+            }
+            catch
+            {
+            }
+
+            rpg.Item = xbys1;
+        }
         void RpgAutoGeneratingPropertyDefinition(object sender, Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs e)
         {
             //IDataErrorInfo
@@ -254,14 +290,73 @@ namespace fangleinew
 
             settingsDialog.ShowDialog();
         }
+        private void jsClosed(object sender, WindowClosedEventArgs e)
+        {
+            var item = this.rpg.Item as 建筑物防雷装置表续要素;
+            string peop = ((sender as RadWindow).Content as 人员选择)._people;
+            if (peop.Trim().Length > 0)
+                item.技术负责人 = peop;
 
+        }
+        private void jhClosed(object sender, WindowClosedEventArgs e)
+        {
+            var item = this.rpg.Item as 建筑物防雷装置表续要素;
+            string peop = ((sender as RadWindow).Content as 人员选择)._people;
+            if (peop.Trim().Length > 0)
+                item.校核人 = peop;
+
+        }
+        private void jhpeopleAdd_Click(object sender, RoutedEventArgs e)
+        {
+            RadWindow settingsDialog = new RadWindow();
+            人员选择 ry = new 人员选择("校核人");
+
+            settingsDialog.Content = ry;
+            settingsDialog.MinWidth = 300;
+            settingsDialog.MinHeight = 180;
+            settingsDialog.ResizeMode = ResizeMode.CanResize;
+            settingsDialog.Header = "校核人选择";
+            settingsDialog.Owner = this;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.HideMinimizeButton = true;
+            settingsDialog.HideMaximizeButton = true;
+            settingsDialog.CanClose = false;
+            settingsDialog.Closed += jhClosed;
+            // Settheme settheme1 = new Settheme();
+            //MainWindow mw = settingsDialog.Owner as MainWindow;
+            ////settheme1.setTheme(this, settheme1.setLightOrDark("Crystal"));
+
+            settingsDialog.ShowDialog();
+        }
+        private void jspeopleAdd_Click(object sender, RoutedEventArgs e)
+        {
+            RadWindow settingsDialog = new RadWindow();
+            人员选择 ry = new 人员选择("技术负责人");
+
+            settingsDialog.Content = ry;
+            settingsDialog.MinWidth = 300;
+            settingsDialog.MinHeight = 180;
+            settingsDialog.ResizeMode = ResizeMode.CanResize;
+            settingsDialog.Header = "技术负责人选择";
+            settingsDialog.Owner = this;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.HideMinimizeButton = true;
+            settingsDialog.HideMaximizeButton = true;
+            settingsDialog.CanClose = false;
+            settingsDialog.Closed += jsClosed;
+            // Settheme settheme1 = new Settheme();
+            //MainWindow mw = settingsDialog.Owner as MainWindow;
+            ////settheme1.setTheme(this, settheme1.setLightOrDark("Crystal"));
+
+            settingsDialog.ShowDialog();
+        }
         //新增人员窗口关闭事件处理
         private void OnClosed(object sender, WindowClosedEventArgs e)
         {
-            var item = this.rpg.Item as 建筑物防雷装置要素;
+            var item = this.rpg.Item as 建筑物防雷装置表续要素;
             string peop = ((sender as RadWindow).Content as 人员选择)._people;
-            //if(peop.Trim().Length>2)
-             //item.人员 = peop;
+            if(peop.Trim().Length>2)
+             item.检测员 = peop;
             
         }
         private void YQClosed(object sender, WindowClosedEventArgs e)
@@ -294,16 +389,17 @@ namespace fangleinew
         {
             if (e.DialogResult == true)
             {
-                var item = this.rpg.Item as 报告总表要素;
+                var item = this.rpg.Item as 建筑物防雷装置表续要素;
                 数据库处理类 cjkcl = new 数据库处理类();
-                if (!cjkcl.ExistsZB(item.分表编号))
+                if (!cjkcl.ExistsJZWBX(item.编号))
                 {
                     
-                    if(cjkcl.AddZB(item))
+                    if(cjkcl.AddJZWBX(item))
                     {
                         RadWindow rw = GetParentObject<RadWindow>(this, "");
-                        rw.Close();
                         boolBS = true;
+                        rw.Close();
+                        
                     }
                     else
                     {
@@ -317,13 +413,40 @@ namespace fangleinew
                 }
                 else
                 {
-                    RadWindow.Alert(new DialogParameters
+                    RadWindow.Confirm(new DialogParameters
                     {
-                        Content = "报告编号已存在，请修改编号",
+                        Content = "建筑物表续编号已存在，继续保存将覆盖已有数据，是否继续？",
+                        Closed = new EventHandler<WindowClosedEventArgs>(UpdateClosed),
+                        Header = "注意",
+                        CancelButtonContent = "否",
+                        OkButtonContent = "是"
 
                     });
                 }
                 
+            }
+        }
+        private void UpdateClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                var item = this.rpg.Item as 建筑物防雷装置表续要素;
+                数据库处理类 cjkcl = new 数据库处理类();
+                if (cjkcl.UpdateJZWBX(item))
+                {
+                    RadWindow rw = GetParentObject<RadWindow>(this, "");
+                    boolBS = true;
+                    rw.Close();
+
+                }
+                else
+                {
+                    RadWindow.Alert(new DialogParameters
+                    {
+                        Content = "数据库新增失败，请重试",
+
+                    });
+                }
             }
         }
         private void CancelConfirmClosed(object sender, WindowClosedEventArgs e)

@@ -2,6 +2,7 @@
 using System.Windows.Controls;
 using Telerik.Windows.Controls;
 using Telerik.Windows.Controls.Data.PropertyGrid;
+using System;
 
 namespace fangleinew
 {
@@ -43,6 +44,22 @@ namespace fangleinew
             {
                 return XBSelectTemplate;
             }
+            else if (pd.SourceProperty.Name == "Jzwspd")
+            {
+                return SPDSelectTemplate;
+            }
+            else if (pd.SourceProperty.Name=="第一级安装数量")
+            {
+                return AZSLTemplate1;
+            }
+            else if (pd.SourceProperty.Name == "第二级安装数量")
+            {
+                return AZSLTemplate2;
+            }
+            else if (pd.SourceProperty.Name == "第三级安装数量")
+            {
+                return AZSLTemplate3;
+            }
             else if(pd.SourceProperty.PropertyType == typeof(double))
             {
                 return NumericPropertyTemplate;
@@ -61,8 +78,12 @@ namespace fangleinew
         public DataTemplate NumIntPropertyTemplate { get; set; }
         public DataTemplate YQSelectTemplate { get; set; }
         public DataTemplate XBSelectTemplate { get; set; }
+        public DataTemplate SPDSelectTemplate { get; set; }
         public DataTemplate jhPeopleSelectTemplate { get; set; }
         public DataTemplate jsPeopleSelectTemplate { get; set; }
         public DataTemplate zhPJTemplate { get; set; }
+        public DataTemplate AZSLTemplate1 { get; set; }
+        public DataTemplate AZSLTemplate2 { get; set; }
+        public DataTemplate AZSLTemplate3 { get; set; }
     }
 }

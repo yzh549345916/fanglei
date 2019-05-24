@@ -205,7 +205,7 @@ namespace fangleinew
         }
         private string jdfs = "/";
         [Display(Description = "接地方式", GroupName = "02.接地装置", Order = 11)]
-        [TypeConverter(typeof(JDZZTypeConverter))]
+        [TypeConverter(typeof(JDFSTypeConverter))]
         public string 接地方式
         {
             get { return jdfs; }

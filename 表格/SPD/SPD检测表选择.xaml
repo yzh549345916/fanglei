@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="fangleinew.建筑物防雷装置检测表续选择"
+﻿<UserControl x:Class="fangleinew.SPD检测表选择"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 

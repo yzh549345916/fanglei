@@ -21,7 +21,7 @@
                                 <ColumnDefinition/>
                                 <ColumnDefinition Width="Auto"/>
                             </Grid.ColumnDefinitions>
-                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Date" Grid.Column="0"/>
                             <Button Padding="5, 0" Content="..." Grid.Column="1" Click="SelectFileClick"/>
                         </Grid>
                     </DataTemplate>

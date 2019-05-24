@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="fangleinew.建筑物防雷装置表续属性表"
+﻿<UserControl x:Class="fangleinew.SPD检测表属性表"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -14,18 +14,6 @@
     <Grid>
         <Grid.Resources>
             <local:FileUploadTemplateSelector x:Key="dataTemplateSelector">
-                <local:FileUploadTemplateSelector.OpenFileDialogTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
-                            <Button Padding="5, 0" Content="..." Grid.Column="1" Click="SelectFileClick"/>
-                        </Grid>
-                    </DataTemplate>
-                </local:FileUploadTemplateSelector.OpenFileDialogTemplate>
                 <local:FileUploadTemplateSelector.jhPeopleSelectTemplate>
                     <DataTemplate>
                         <Grid>
@@ -50,6 +38,42 @@
                         </Grid>
                     </DataTemplate>
                 </local:FileUploadTemplateSelector.jsPeopleSelectTemplate>
+                <local:FileUploadTemplateSelector.AZSLTemplate1>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="AZSL1Add_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.AZSLTemplate1>
+                <local:FileUploadTemplateSelector.AZSLTemplate2>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="AZSL2Add_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.AZSLTemplate2>
+                <local:FileUploadTemplateSelector.AZSLTemplate3>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
+                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="AZSL3Add_Click"/>
+                        </Grid>
+                    </DataTemplate>
+                </local:FileUploadTemplateSelector.AZSLTemplate3>
                 <local:FileUploadTemplateSelector.PeopleSelectTemplate>
                     <DataTemplate>
                         <Grid>
@@ -64,7 +88,7 @@
                 </local:FileUploadTemplateSelector.PeopleSelectTemplate>
                 <local:FileUploadTemplateSelector.NumericPropertyTemplate>
                     <DataTemplate>
-                        <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="0.01" />
+                        <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="0.1" />
                     </DataTemplate>
                 </local:FileUploadTemplateSelector.NumericPropertyTemplate>
                 <local:FileUploadTemplateSelector.NumIntPropertyTemplate>
@@ -72,18 +96,6 @@
                     <telerik:RadNumericUpDown telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Value" SmallChange="1" />
                 </DataTemplate>
                 </local:FileUploadTemplateSelector.NumIntPropertyTemplate>
-                <local:FileUploadTemplateSelector.YQSelectTemplate>
-                    <DataTemplate>
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="Auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBox telerik:AutoBindBehavior.UpdateBindingOnElementLoaded="Text" Grid.Column="0"/>
-                            <Button Padding="5, 0" Content="+" Grid.Column="1" Click="YQAdd_Click"/>
-                        </Grid>
-                    </DataTemplate>
-                </local:FileUploadTemplateSelector.YQSelectTemplate>
                 <local:FileUploadTemplateSelector.zhPJTemplate>
                     <DataTemplate>
                         <Grid>

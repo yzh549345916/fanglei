@@ -10,7 +10,7 @@ namespace fangleinew
 {
     public class 建筑物防雷装置要素 : IDataErrorInfo, INotifyPropertyChanged
     {
-        private string xmName;
+        private string xmName="";
         [Display(Description = "项目名称", GroupName = "01.基本信息",Order =1)]
         public string 项目名称
         {
@@ -25,7 +25,7 @@ namespace fangleinew
                 
             }
         }
-        private string address;
+        private string address = "";
         [Display(Description = "地址", GroupName = "01.基本信息", Order = 2)]
         public string 地址
         {
@@ -40,7 +40,7 @@ namespace fangleinew
                 
             }
         }
-        private string lxPeople;
+        private string lxPeople = "";
         [Display(Description = "联系人", GroupName = "01.基本信息", Order = 3)]
         public string 联系人
         {
@@ -55,7 +55,7 @@ namespace fangleinew
                 
             }
         }
-        private string phoneNum;
+        private string phoneNum = "";
         [Display(Description = "电话", GroupName = "01.基本信息", Order = 4)]
         public string 电话
         {
@@ -90,7 +90,7 @@ namespace fangleinew
 
         }
 
-        private weatherEnu myWeather;
+        private weatherEnu myWeather=weatherEnu.晴;
         [Display(Description = "天气", GroupName = "01.基本信息", Order = 5)]
         public weatherEnu 天气
         {
@@ -107,7 +107,7 @@ namespace fangleinew
         }
 
         
-        private string yjbz;
+        private string yjbz = "";
         [Display(Description = "依据标准", GroupName = "01.基本信息", Order = 6)]
         public string 依据标准
         {
@@ -122,7 +122,7 @@ namespace fangleinew
                 
             }
         }
-        private string jcPeople;
+        private string jcPeople = "";
         [Display(Description = "检测员", GroupName = "01.基本信息", Order = 7)]
         public string 检测员
         {
@@ -137,7 +137,7 @@ namespace fangleinew
 
             }
         }
-        private string jhPeople;
+        private string jhPeople = "";
         [Display(Description = "校核人", GroupName = "01.基本信息", Order = 8)]
         public string 校核人
         {
@@ -152,7 +152,7 @@ namespace fangleinew
 
             }
         }
-        private string jsPeople;
+        private string jsPeople = "";
         [Display(Description = "技术负责人", GroupName = "01.基本信息", Order = 9)]
         public string 技术负责人
         {
@@ -318,7 +318,7 @@ namespace fangleinew
             }
         }
 
-        private string clgg1;
+        private string clgg1 = "/";
         [Display(Description = "接闪杆材料规格", GroupName = "03.接闪装置", Order = 16,ShortName = "接闪杆材料规格")]
         public string Clgg1
         {
@@ -334,7 +334,7 @@ namespace fangleinew
             }
         }
         
-        private string xsLB1;
+        private string xsLB1 = "/";
         [TypeConverter(typeof(xsTypeConverter))]
         [Display(Description = "接闪杆锈蚀情况", GroupName = "03.接闪装置", Order = 17, ShortName = "接闪杆锈蚀情况")]
         public string XsLB1
@@ -349,7 +349,7 @@ namespace fangleinew
                 }
             }
         }
-        private string bhLB1;
+        private string bhLB1 = "/";
         [TypeConverter(typeof(BHTypeConverter))]
         [Display(Description = "接闪杆保护范围", GroupName = "03.接闪装置", Order = 18, ShortName = "接闪杆保护范围")]
         public string BhLB1
@@ -365,7 +365,7 @@ namespace fangleinew
                
             }
         }
-        private double jdzz1;
+        private double jdzz1=-0.1;
         [Display(Description = "接闪杆接地电阻，填写负数则生成报告时为/", GroupName = "03.接闪装置", Order = 19, ShortName = "接闪杆接地电阻")]
         public double Jdzz1
         {
@@ -377,7 +377,7 @@ namespace fangleinew
 
             }
         }
-        private string dxpj1;
+        private string dxpj1 = "/";
         [Display(Description = "接闪杆单项评价", GroupName = "03.接闪装置", Order = 20, ShortName = "接闪杆单项评价")]
         public string Dxpj1
         {
@@ -392,7 +392,7 @@ namespace fangleinew
                 
             }
         }
-        private string jsdclgg;
+        private string jsdclgg = "/";
         [Display(Description = "接闪带材料规格", GroupName = "03.接闪装置", Order = 21, ShortName = "接闪带材料规格")]
         public string Jsdclgg
         {
@@ -408,7 +408,7 @@ namespace fangleinew
             }
         }
 
-        private string jsdxs;
+        private string jsdxs = "/";
         [TypeConverter(typeof(xsTypeConverter))]
         [Display(Description = "接闪带锈蚀情况", GroupName = "03.接闪装置", Order = 22, ShortName = "接闪带锈蚀情况")]
         public string Jsdxs
@@ -424,7 +424,7 @@ namespace fangleinew
                
             }
         }
-        private string jsdbhfw;
+        private string jsdbhfw = "/";
         [TypeConverter(typeof(BHTypeConverter))]
         [Display(Description = "接闪带保护范围", GroupName = "03.接闪装置", Order = 23, ShortName = "接闪带保护范围")]
         public string Jsdbhfw
@@ -440,7 +440,7 @@ namespace fangleinew
                 
             }
         }
-        private double jsdjddz;
+        private double jsdjddz=-0.1;
         [Display(Description = "接闪带接地电阻，填写负数则生成报告时为/", GroupName = "03.接闪装置", Order = 24, ShortName = "接闪带接地电阻")]
         public double Jsdjddz
         {
@@ -451,7 +451,7 @@ namespace fangleinew
                 this.OnPropertyChanged("Jsdjddz");
             }
         }
-        private string jsddxpj;
+        private string jsddxpj = "/";
         [Display(Description = "接闪带单项评价", GroupName = "03.接闪装置", Order = 25, ShortName = "接闪带单项评价")]
         public string Jsddxpj
         {
@@ -466,7 +466,7 @@ namespace fangleinew
                 
             }
         }
-        private string jswlclgg;
+        private string jswlclgg = "/";
         [Display(Description = "接闪网络材料规格", GroupName = "03.接闪装置", Order = 26, ShortName = "接闪网络材料规格")]
         public string Jswlclgg
         {
@@ -482,7 +482,7 @@ namespace fangleinew
             }
         }
 
-        private string jswlxs;
+        private string jswlxs = "/";
         [TypeConverter(typeof(xsTypeConverter))]
         [Display(Description = "接闪网络锈蚀情况", GroupName = "03.接闪装置", Order = 27, ShortName = "接闪网络锈蚀情况")]
         public string Jswlxs
@@ -498,7 +498,7 @@ namespace fangleinew
                 
             }
         }
-        private string jswlbhfw;
+        private string jswlbhfw = "/";
         [TypeConverter(typeof(BHTypeConverter))]
         [Display(Description = "接闪网络保护范围", GroupName = "03.接闪装置", Order = 28, ShortName = "接闪网络保护范围")]
         public string Jswlbhfw
@@ -514,7 +514,7 @@ namespace fangleinew
                
             }
         }
-        private double jswljddz;
+        private double jswljddz=-0.1;
         [Display(Description = "接闪网络接地电阻，填写负数则生成报告时为/", GroupName = "03.接闪装置", Order = 29, ShortName = "接闪网络接地电阻")]
         public double Jswljddz
         {
@@ -526,7 +526,7 @@ namespace fangleinew
                 this.OnPropertyChanged("Jswljddz");
             }
         }
-        private string jswldxpj;
+        private string jswldxpj = "/";
         [Display(Description = "接闪网络单项评价", GroupName = "03.接闪装置", Order = 30, ShortName = "接闪网络单项评价")]
         public string Jswldxpj
         {
@@ -542,7 +542,7 @@ namespace fangleinew
             }
         }
 
-        private double jsjg1;
+        private double jsjg1=-0.1;
         [Display(Description = "金属结构间等电位连接，填写负数则生成报告时为/", GroupName = "04.大型金属构件", Order = 31, ShortName = "金属结构间等电位连接")]
         public double jsjgDDW
         {
@@ -553,7 +553,7 @@ namespace fangleinew
                 this.OnPropertyChanged("jsjgDDW");
             }
         }
-        private double jsjg2;
+        private double jsjg2=-0.1;
         [Display(Description = "金属结构与接闪带连接，填写负数则生成报告时为/", GroupName = "04.大型金属构件", Order = 32, ShortName = "金属结构与接闪带连接")]
         public double jsjgJSD
         {
@@ -581,7 +581,7 @@ namespace fangleinew
                 return new StandardValuesCollection(new string[] { "4*40mm扁钢", "Φ10mm圆钢", "/" });
             }
         }
-        private string ljcl;
+        private string ljcl = "/";
         [Display(Description = "连接用材料", GroupName = "04.大型金属构件", Order = 33, ShortName = "连接用材料")]
         [TypeConverter(typeof(LJCLTypeConverter))]
         public string Ljcl
@@ -596,7 +596,7 @@ namespace fangleinew
                 }
             }
         }
-        private string jsdxpj;
+        private string jsdxpj = "/";
         [Display(Description = "大型金属构件单项评价", GroupName = "04.大型金属构件", Order = 34, ShortName = "大型金属构件单项评价")]
       
         public string Jsdxpj
@@ -628,7 +628,7 @@ namespace fangleinew
                 return new StandardValuesCollection(new string[] { "架空敷设", "沿屋面敷设","沿女儿墙敷设", "/" });
             }
         }
-        private string dyfsfs;
+        private string dyfsfs = "/";
         [Display(Description = "敷设方式", GroupName = "05.电源、信号线路", Order = 35, ShortName = "敷设方式")]
         [TypeConverter(typeof(FSFSTypeConverter))]
         public string Dyfsfs
@@ -660,7 +660,7 @@ namespace fangleinew
                 return new StandardValuesCollection(new string[] { "穿金属管", "金属线槽", "未采取措施", "/" });
             }
         }
-        private string pbbhcs;
+        private string pbbhcs = "/";
         [Display(Description = "屏蔽保护措施", GroupName = "05.电源、信号线路", Order = 36, ShortName = "屏蔽保护措施")]
         [TypeConverter(typeof(PBBHCSTypeConverter))]
         public string Pbbhcs
@@ -692,7 +692,7 @@ namespace fangleinew
                 return new StandardValuesCollection(new string[] { "接地", "未接地", "/" });
             }
         }
-        private string pbbhcjd;
+        private string pbbhcjd = "/";
         [Display(Description = "屏蔽保护层接地", GroupName = "05.电源、信号线路", Order = 37, ShortName = "屏蔽保护层接地")]
         [TypeConverter(typeof(JDTypeConverter))]
         public string Pbbhcjd
@@ -707,7 +707,7 @@ namespace fangleinew
                 }
             }
         }
-        private string dyxldxpj;
+        private string dyxldxpj = "/";
         [Display(Description = "电源、信号线路单项评价", GroupName = "05.电源、信号线路", Order = 38, ShortName = "电源、信号线路单项评价")]
 
         public string Dyxldxpj
@@ -1126,7 +1126,7 @@ namespace fangleinew
             }
         }
        
-        private string jzwxb;
+        private string jzwxb="";
         [Display(Description = "建筑物检测报告续表编号，如果为空或者/，则说明没有续表", GroupName = "08.其他信息", Order = 90, ShortName = "续表编号")]
         public string Jzwxb
         {
@@ -1141,7 +1141,7 @@ namespace fangleinew
 
             }
         }
-        private string jzwspd;
+        private string jzwspd="";
         [Display(Description = "建筑物检测报告SPD编号，如果为空或者/，则说明没有SPD表", GroupName = "08.其他信息", Order = 91, ShortName = "SPD编号")]
         public string Jzwspd
         {
@@ -1171,7 +1171,7 @@ namespace fangleinew
 
             }
         }
-        private int pagetNum;
+        private int pagetNum=1;
         [Display(Description = "检测表页数，一般自动生成，不修改", GroupName = "09.其他信息", Order = 101,ShortName = "检测表页数")]
         public int PageNum
         {

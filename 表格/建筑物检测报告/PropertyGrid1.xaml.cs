@@ -308,7 +308,7 @@ namespace fangleinew
             settingsDialog.ResizeMode = ResizeMode.CanResize;
             settingsDialog.Header = "检测员选择";
             settingsDialog.Owner = this;
-            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsDialog.HideMinimizeButton = true;
             settingsDialog.HideMaximizeButton = true;
             settingsDialog.CanClose = false;
@@ -330,7 +330,7 @@ namespace fangleinew
             settingsDialog.ResizeMode = ResizeMode.CanResize;
             settingsDialog.Header = "校核人选择";
             settingsDialog.Owner = this;
-            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsDialog.HideMinimizeButton = true;
             settingsDialog.HideMaximizeButton = true;
             settingsDialog.CanClose = false;
@@ -352,7 +352,7 @@ namespace fangleinew
             settingsDialog.ResizeMode = ResizeMode.CanResize;
             settingsDialog.Header = "技术负责人选择";
             settingsDialog.Owner = this;
-            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsDialog.HideMinimizeButton = true;
             settingsDialog.HideMaximizeButton = true;
             settingsDialog.CanClose = false;
@@ -374,7 +374,7 @@ namespace fangleinew
             settingsDialog.ResizeMode = ResizeMode.CanResize;
             settingsDialog.Header = "依据标准选择";
             settingsDialog.Owner = this;
-            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsDialog.HideMinimizeButton = true;
             settingsDialog.HideMaximizeButton = true;
             settingsDialog.CanClose = false;
@@ -397,7 +397,7 @@ namespace fangleinew
             settingsDialog.ResizeMode = ResizeMode.CanResize;
             settingsDialog.Header = "建筑物防雷装置检测表续选择";
             settingsDialog.Owner = this;
-            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
             settingsDialog.HideMinimizeButton = true;
             settingsDialog.HideMaximizeButton = true;
             settingsDialog.CanClose = false;
@@ -408,12 +408,57 @@ namespace fangleinew
 
             settingsDialog.ShowDialog();
         }
+
+        private void spdAdd_Click(object sender, RoutedEventArgs e)
+        {
+            RadWindow settingsDialog = new RadWindow();
+            var item = rpg.Item as 建筑物防雷装置要素;
+            SPD检测表选择 ry = new SPD检测表选择(item.检测员,item.校核人,item.技术负责人);
+
+
+            settingsDialog.Content = ry;
+            settingsDialog.MinWidth = 300;
+            settingsDialog.MinHeight = 250;
+            settingsDialog.ResizeMode = ResizeMode.CanResize;
+            settingsDialog.Header = "SPD检测表续选择";
+            settingsDialog.Owner = this;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            settingsDialog.HideMinimizeButton = true;
+            settingsDialog.HideMaximizeButton = true;
+            settingsDialog.CanClose = false;
+            settingsDialog.Closed += SPDClosed;
+            // Settheme settheme1 = new Settheme();
+            //MainWindow mw = settingsDialog.Owner as MainWindow;
+            ////settheme1.setTheme(this, settheme1.setLightOrDark("Crystal"));
+
+            settingsDialog.ShowDialog();
+        }
+        private void SPDClosed(object sender, WindowClosedEventArgs e)
+        {
+            var item = this.rpg.Item as 建筑物防雷装置要素;
+            string peop = ((sender as RadWindow).Content as SPD检测表选择)._people;
+            if (peop.Trim().Length > 0)
+                item.Jzwspd = peop;
+            int count = 1;
+            if (item.Jzwxb.Length > 1)
+                count++;
+            if (item.Jzwspd.Length > 1)
+                count++;
+            item.PageNum = count;
+
+        }
         private void XBClosed(object sender, WindowClosedEventArgs e)
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 建筑物防雷装置检测表续选择)._people;
             if (peop.Trim().Length > 0)
                 item.Jzwxb = peop;
+            int count = 1;
+            if (item.Jzwxb.Length > 1)
+                count++;
+            if (item.Jzwspd.Length > 1)
+                count++;
+            item.PageNum = count;
 
         }
         //新增人员窗口关闭事件处理
@@ -453,7 +498,57 @@ namespace fangleinew
 
         private void SaveBtu_Click(object sender, RoutedEventArgs e)
         {
+            string confirmText = "是否确定保存数据?";
+            RadWindow.Confirm(new DialogParameters
+            {
+                Content = confirmText,
+                Closed = new EventHandler<WindowClosedEventArgs>(OnConfirmClosed),
+                Header = "注意",
+                CancelButtonContent = "否",
+                OkButtonContent = "是"
 
+            });
+        }
+        private void OnConfirmClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                var item = this.rpg.Item as 建筑物防雷装置要素;
+                数据库处理类 cjkcl = new 数据库处理类();
+                if (!cjkcl.ExistsJZWBX(item.编号))
+                {
+
+                    if (cjkcl.AddJZWBX(item))
+                    {
+                        RadWindow rw = GetParentObject<RadWindow>(this, "");
+                        boolBS = true;
+                        rw.Close();
+
+                    }
+                    else
+                    {
+                        RadWindow.Alert(new DialogParameters
+                        {
+                            Content = "数据库新增失败，请重试",
+
+                        });
+                    }
+
+                }
+                else
+                {
+                    RadWindow.Confirm(new DialogParameters
+                    {
+                        Content = "建筑物表续编号已存在，继续保存将覆盖已有数据，是否继续？",
+                        Closed = new EventHandler<WindowClosedEventArgs>(UpdateClosed),
+                        Header = "注意",
+                        CancelButtonContent = "否",
+                        OkButtonContent = "是"
+
+                    });
+                }
+
+            }
         }
 
         private void CancelBtu_Click(object sender, RoutedEventArgs e)

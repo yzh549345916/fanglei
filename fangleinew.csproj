@@ -171,6 +171,16 @@
     <Compile Include="NavigationItemModel.cs" />
     <Compile Include="NavigationContentTemplateSelector.cs" />
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="表格\SPD\SPD要素.cs" />
+    <Compile Include="表格\SPD\SPD检测表选择.xaml.cs">
+      <DependentUpon>SPD检测表选择.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="表格\SPD\SPD检测表属性表.xaml.cs">
+      <DependentUpon>SPD检测表属性表.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="表格\SPD\安装数量选择.xaml.cs">
+      <DependentUpon>安装数量选择.xaml</DependentUpon>
+    </Compile>
     <Compile Include="表格\建筑物检测报告\建筑物防雷装置表续要素.cs" />
     <Compile Include="表格\建筑物检测报告\建筑物防雷装置检测表续选择.xaml.cs">
       <DependentUpon>建筑物防雷装置检测表续选择.xaml</DependentUpon>
@@ -220,11 +230,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="表格\SPD\SPD检测表选择.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="表格\SPD\安装数量选择.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="表格\建筑物检测报告\建筑物防雷装置检测表续选择.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
     <Page Include="表格\仪器选择.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="表格\SPD\SPD检测表属性表.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
