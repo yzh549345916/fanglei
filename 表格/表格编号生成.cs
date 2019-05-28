@@ -155,5 +155,54 @@ namespace fangleinew
                 return "HSFL-SPD-" + DateTime.Now.ToString("yyyyMMdd") + "-0001";
             }
         }
+
+        public string 获取建筑物防雷装置检测表最新编号()
+        {
+            try
+            {
+                using (SqlConnection mycon = new SqlConnection(_con))
+                {
+                    mycon.Open();//打开
+                    string sql = string.Format("select top 1 * from 建筑物防雷装置检测表 order  BY 编号 DESC");  //SQL查询语句 (Name,StationID,Date)。按照数据库中的表的字段顺序保存
+                    SqlCommand sqlman = new SqlCommand(sql, mycon);
+                    SqlDataReader sqlreader = sqlman.ExecuteReader();
+                    string bhls = "";
+                    while (sqlreader.Read())
+                    {
+                        bhls = sqlreader.GetString(sqlreader.GetOrdinal("编号")).Trim();
+                    }
+                    if (bhls.Length == 0)//如果当年不存在检测报告，新建第一个
+                    {
+                        return "HSFL-JZWFB-" + DateTime.Now.ToString("yyyyMMdd") + "-0001";
+                    }
+
+                    try
+                    {
+                        if (bhls.Split('-')[2] == DateTime.Now.ToString("yyyyMMdd"))
+                        {
+                            int countls = 1;
+                            try
+                            {
+                                countls = Convert.ToInt32(bhls.Split('-')[3].Trim());
+                            }
+                            catch
+                            {
+                            }
+                            countls++;
+                            return "HSFL-JZWFB-" + DateTime.Now.ToString("yyyyMMdd-") + countls.ToString().PadLeft(4, '0');
+                        }
+                    }
+                    catch
+                    {
+                        return "HSFL-JZWFB-" + DateTime.Now.ToString("yyyyMMdd") + "-0001";
+                    }
+                }
+                return "HSFL-JZWFB-" + DateTime.Now.ToString("yyyyMMdd") + "-0001";
+            }
+            catch
+            {
+                return "HSFL-JZWFB-" + DateTime.Now.ToString("yyyyMMdd") + "-0001";
+            }
+        }
     }
 }

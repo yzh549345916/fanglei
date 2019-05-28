@@ -35,7 +35,10 @@ namespace 表格分层
 
             }
         }
-
+        public 检测报告总表类 getZBbyID(string bh)
+        {
+           return  jcbgZbs.First(y => y.Zbid == bh);
+        }
         public ObservableCollection<检测报告分表类> JcbgFbs
         {
             get

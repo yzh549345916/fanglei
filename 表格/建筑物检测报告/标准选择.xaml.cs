@@ -34,9 +34,13 @@ namespace fangleinew
 
         private void OKBtu_Click(object sender, RoutedEventArgs e)
         {
-            _bz = xcb1.Text;
-            RadWindow rw = GetParentObject<RadWindow>(this, "");
-            rw.Close();
+           
+            if (xcb1.SelectedIndex >= 0)
+            {
+                _bz = xcb1.Text;
+                RadWindow rw = GetParentObject<RadWindow>(this, "");
+                rw.Close();
+            }
         }
         /// <summary>
         /// 查找父控件

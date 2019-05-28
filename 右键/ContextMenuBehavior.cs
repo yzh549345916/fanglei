@@ -10,9 +10,10 @@ namespace 表格分层
 {
     public class GridContextMenuBehavior
     {
+        object _rowit = null;
         private readonly RadGridView gridView = null;
         private readonly FrameworkElement contextMenu = null;
-
+        string _closeID = "";
         public static readonly DependencyProperty ContextmenuPropery =
         DependencyProperty.RegisterAttached("ContextMenu", typeof(FrameworkElement), typeof(GridContextMenuBehavior),
             new PropertyMetadata(new PropertyChangedCallback(OnIsEnabledPropertyChanged)));
@@ -54,26 +55,80 @@ namespace 表格分层
                 RadContextMenu menu = (RadContextMenu)sender;
                 RadMenuItem clickedItem = e.OriginalSource as RadMenuItem;
                 GridViewRow row = menu.GetClickedElement<GridViewRow>();
+                
                 GridJCBG rw1 = GetParentObject<GridJCBG>(row.GridViewDataControl, "");
                 // var ls = menu.DataContext as 表格分层.MyGridData;//刷新表格数据
                 //ls.JcbgZbs = 检测报告总表类.GetZbs2();
                 if (clickedItem != null && row != null)
                 {
                     string header = Convert.ToString(clickedItem.Header);
-
+                    string typeStr=row.Item.GetType().ToString();
+                    检测报告分表类 fbitem;
+                    MyGridData myGridData;
                     switch (header)
                     {
                         case "新增检测报告":
                             新增检测报告(rw1);
                             break;
-                        case "编辑":
-                            gridView.BeginEdit();
+                        case "查看检测报告":
+                            
+                            查看检测报告(rw1, (row.Item as 检测报告总表类)?.Zbid);
                             break;
-                        case "测试总表1":
-                            MessageBox.Show(header);
+                        case "新增建（构）筑物防雷装置检测表":
+                            _rowit = row.Item;
+                            if (typeStr== "表格分层.检测报告总表类")
+                            {
+                                新增建筑物防雷装置检测表(rw1, row.Item as 检测报告总表类);
+
+                            }
+                            else
+                            {
+                                myGridData = rw1.clubsGrid.DataContext as MyGridData;
+                                fbitem = row.Item as 检测报告分表类;
+                                _rowit = myGridData.getZBbyID(fbitem.Zbid);
+                                
+                                新增建筑物防雷装置检测表(rw1, _rowit as 检测报告总表类);
+                            }
                             break;
-                        case "测试分表3":
-                            MessageBox.Show(header);
+                        case "查看":
+                            myGridData = rw1.clubsGrid.DataContext as MyGridData;
+                            fbitem = row.Item as 检测报告分表类;
+                            _rowit = myGridData.getZBbyID(fbitem.Zbid);
+                            查看检测报告分表(rw1, fbitem);
+                            break;
+                        case "删除":
+                            _rowit = row.Item;
+                            if (typeStr == "表格分层.检测报告总表类")
+                            {
+                                _closeID = (row.Item as 检测报告总表类).Zbid;
+                                RadWindow.Confirm(new DialogParameters
+                                {
+                                    Content = "删除检测报告将同时删除其包含的检测报告分表，是否继续删除？",
+                                    Closed = DeleteZBConfirmClosed,
+                                    Header = "注意",
+                                    CancelButtonContent = "否",
+                                    OkButtonContent = "是",
+                                    Owner=rw1
+                                });
+
+                            }
+                            else
+                            {
+                                myGridData = rw1.clubsGrid.DataContext as MyGridData;
+                                fbitem = row.Item as 检测报告分表类;
+                                _rowit = myGridData.getZBbyID(fbitem.Zbid);
+
+                                _closeID = fbitem.Fbid;
+                                RadWindow.Confirm(new DialogParameters
+                                {
+                                    Content = "即将删除检测报告分表，是否继续删除？",
+                                    Closed = DeleteFBConfirmClosed,
+                                    Header = "注意",
+                                    CancelButtonContent = "否",
+                                    OkButtonContent = "是",
+                                    Owner = rw1
+                                });
+                            }
                             break;
                         default:
                             break;
@@ -83,6 +138,72 @@ namespace 表格分层
            catch
            {
            }
+        }
+        private void DeleteZBConfirmClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                数据库处理类 sjkcl = new 数据库处理类();
+               
+                sjkcl.DeleteZB(_closeID);
+                MyGridData myGridData = ((sender as RadWindow).Owner as GridJCBG).clubsGrid.DataContext as MyGridData;
+                myGridData.JcbgZbs = 检测报告总表类.GetZbs();
+            }
+        }
+        private void DeleteFBConfirmClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                数据库处理类 sjkcl = new 数据库处理类();
+
+                sjkcl.deleFBList((_rowit as 检测报告总表类).Zbid,_closeID);
+                
+                sjkcl.DeleteFB(_closeID);
+                var zbys = sjkcl.GetZBbyBh((_rowit as 检测报告总表类).Zbid);
+                zbys.报告页数 = sjkcl.GetPagebyZB(zbys.编号);
+                sjkcl.UpdateZB(zbys);
+                MyGridData myGridData = ((sender as RadWindow).Owner as GridJCBG).clubsGrid.DataContext as MyGridData;
+                myGridData.JcbgZbs = 检测报告总表类.updateZbs(myGridData.JcbgZbs, (_rowit as 检测报告总表类).Zbid);
+            }
+        }
+        private void 查看检测报告分表(GridJCBG gridJCBG,检测报告分表类 fb )
+        {
+            数据库处理类 sjkcl = new 数据库处理类();
+            RadWindow settingsDialog = new RadWindow();
+            switch (fb.FenLei)
+            {
+                case "建筑物防雷装置检测表":
+                    
+                    建筑物防雷装置要素 fljz =sjkcl.GetJZWFBbyBh(fb.Fbid);
+                    var zbys = sjkcl.GetZBbyBh(fljz.报告编号);
+                    PropertyGrid1 ry = new PropertyGrid1(zbys,fljz);
+                    settingsDialog.Content = ry;
+                    settingsDialog.Closed += 新增建筑物防雷装置检测表关闭;
+                    break;
+                case "建筑物电子信息系统防雷装置检测表":
+                   
+                    break;
+                case "爆炸和火灾危险场所防雷装置检测表":
+                    
+                    break;
+                case "风力发电机组防雷装置检测表":
+                    
+                    break;
+                case "太阳能光伏系统防雷装置检测表":
+                    
+                    break;
+                default:
+                    break;
+            }
+            settingsDialog.Owner = gridJCBG;
+            settingsDialog.MinWidth = 300;
+            settingsDialog.MinHeight = 180;
+            settingsDialog.ResizeMode = ResizeMode.CanResize;
+            settingsDialog.Header = "查看" + fb.FenLei;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.Manual;
+            
+            settingsDialog.ShowDialog();
+
         }
         private void 新增检测报告(GridJCBG gridJCBG)
         {
@@ -95,7 +216,60 @@ namespace 表格分层
             settingsDialog.MinHeight = 180;
             settingsDialog.ResizeMode = ResizeMode.CanResize;
             settingsDialog.Header = "新增检测报告";
-            settingsDialog.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.Manual;
+            settingsDialog.Closed += 新增总表属性表关闭;
+            settingsDialog.ShowDialog();
+        }
+        private void 新增建筑物防雷装置检测表(GridJCBG gridJCBG,检测报告总表类 zbl)
+        {
+            数据库处理类 sjkcl = new 数据库处理类();
+            报告总表要素 zbys = sjkcl.GetZBbyBh(zbl.Zbid);
+            表格编号生成 bhsc = new 表格编号生成();
+            RadWindow settingsDialog = new RadWindow();
+            PropertyGrid1 ry = new PropertyGrid1(zbys, bhsc.获取建筑物防雷装置检测表最新编号());
+            settingsDialog.Owner = gridJCBG;
+            settingsDialog.Content = ry;
+            settingsDialog.MinWidth = 300;
+            settingsDialog.MinHeight = 180;
+            settingsDialog.ResizeMode = ResizeMode.CanResize;
+            settingsDialog.Header = "新增建（构）筑物防雷装置检测表";
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.Manual;
+            settingsDialog.Closed += 新增建筑物防雷装置检测表关闭;
+            settingsDialog.ShowDialog();
+        }
+        private void 新增建筑物防雷装置检测表关闭(object sender, WindowClosedEventArgs e)
+        {
+            try
+            {
+                数据库处理类 sjkcl = new 数据库处理类();
+                
+                PropertyGrid1 zsxb = (sender as RadWindow).Content as PropertyGrid1;
+                sjkcl.UpdateZB(zsxb._zbys);
+                if (zsxb.boolBS)
+                {
+                    MyGridData myGridData = ((sender as RadWindow).Owner as GridJCBG).clubsGrid.DataContext as MyGridData;
+                    myGridData.JcbgZbs = 检测报告总表类.updateZbs(myGridData.JcbgZbs, (_rowit as 检测报告总表类).Zbid);
+
+                }
+            }
+            catch(Exception ex)
+            {
+            }
+        }
+        private void 查看检测报告(GridJCBG gridJCBG,string bh)
+        {
+
+            表格编号生成 bhsc = new 表格编号生成();
+            RadWindow settingsDialog = new RadWindow();
+            数据库处理类 sjkcl = new 数据库处理类();
+            总表属性表 ry = new 总表属性表(sjkcl.GetZBbyBh(bh));
+            settingsDialog.Owner = gridJCBG;
+            settingsDialog.Content = ry;
+            settingsDialog.MinWidth = 300;
+            settingsDialog.MinHeight = 180;
+            settingsDialog.ResizeMode = ResizeMode.CanResize;
+            settingsDialog.Header = "查看检测报告";
+            settingsDialog.WindowStartupLocation = WindowStartupLocation.Manual;
             settingsDialog.Closed += 新增总表属性表关闭;
             settingsDialog.ShowDialog();
         }
@@ -118,16 +292,27 @@ namespace 表格分层
                 if((selectItem as 检测报告总表类)!=null)
                 {
                     menu.Items.Clear();
+                    menu.Items.Add("查看检测报告");
                     menu.Items.Add("新增检测报告");
-                    menu.Items.Add("测试总表3");
-                    menu.Items.Add("测试总表2");
+                    menu.Items.Add("新增建（构）筑物防雷装置检测表");
+                    menu.Items.Add("新增建筑物电子信息系统防雷装置检测表");
+                    menu.Items.Add("新增爆炸和火灾危险场所防雷装置检测表");
+                    menu.Items.Add("新增风力发电机组防雷装置检测表");
+                    menu.Items.Add("新增太阳能光伏系统防雷装置检测表");
+                    menu.Items.Add("删除");
                 }
                 else if ((selectItem as 检测报告分表类) != null)
                 {
                     menu.Items.Clear();
-                    menu.Items.Add("测试分表1");
-                    menu.Items.Add("测试分表2");
-                    menu.Items.Add("测试分表3");
+                    menu.Items.Add("查看");
+                    menu.Items.Add("新增建（构）筑物防雷装置检测表");
+                    menu.Items.Add("新增建筑物电子信息系统防雷装置检测表");
+                    menu.Items.Add("新增爆炸和火灾危险场所防雷装置检测表");
+                    menu.Items.Add("新增风力发电机组防雷装置检测表");
+                    menu.Items.Add("新增太阳能光伏系统防雷装置检测表");
+                    menu.Items.Add("上移");
+                    menu.Items.Add("下移");
+                    menu.Items.Add("删除");
                 }
                 else
                 {
@@ -140,6 +325,7 @@ namespace 表格分层
                 menu.IsOpen = false;
             }
         }
+
         private void 新增总表属性表关闭(object sender, WindowClosedEventArgs e)
         {
             try
@@ -149,19 +335,8 @@ namespace 表格分层
                 {
                     报告总表要素 ys = zsxb.rpg.Item as 报告总表要素;
                     MyGridData myGridData =((sender as RadWindow).Owner as GridJCBG).clubsGrid.DataContext as MyGridData;
-                    myGridData.JcbgZbs.Add(new 检测报告总表类()
-                    {
-                        CompanyAddress=ys.地址,
-                        StartDate=ys.检测开始日期,
-                        EndDate=ys.检测结束日期,
-                        NextDate=ys.下次检测日期,
-                        TelephoneNumber=ys.电话,
-                        CompanyName=ys.受检单位名称,
-                        ContactDepartment=ys.联系部门,
-                        Zbid=ys.编号,
-                        ZrPeople=ys.负责人,
-                        
-                    });
+                    myGridData.JcbgZbs=检测报告总表类.GetZbs();
+                  
                 }
             }
             catch

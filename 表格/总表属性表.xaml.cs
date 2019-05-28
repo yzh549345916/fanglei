@@ -46,9 +46,16 @@ namespace fangleinew
             {
                 检测开始日期 = DateTime.Now,
                 检测结束日期 = DateTime.Now,
-                编号= bh,
+                编号 = bh,
                 下次检测日期 = DateTime.Now.AddDays(-1).AddYears(1),
+                报告页数 = 1,
             };
+        }
+        public 总表属性表(报告总表要素 item)
+        {
+            InitializeComponent();
+            rpg.AutoGeneratingPropertyDefinition += new EventHandler<Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs>(RpgAutoGeneratingPropertyDefinition);
+            rpg.Item = item;
         }
         void RpgAutoGeneratingPropertyDefinition(object sender, Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs e)
         {
@@ -171,7 +178,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 报告总表要素;
             string peop = ((sender as RadWindow).Content as 仪器选择)._people;
-            if(peop.Trim().Length>2)
+            if(peop!=null&&peop.Trim().Length>2)
              item.仪器列表 = peop;
 
         }
@@ -180,7 +187,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 标准选择)._bz;
-            if (peop.Trim().Length > 2)
+            if (peop != null && peop.Trim().Length > 2)
                 item.依据标准 = peop;
 
         }
@@ -206,7 +213,7 @@ namespace fangleinew
             {
                 var item = this.rpg.Item as 报告总表要素;
                 数据库处理类 cjkcl = new 数据库处理类();
-                if (!cjkcl.ExistsZB(item.分表编号))
+                if (!cjkcl.ExistsZB(item.编号))
                 {
                     
                     if(cjkcl.AddZB(item))
@@ -227,13 +234,40 @@ namespace fangleinew
                 }
                 else
                 {
-                    RadWindow.Alert(new DialogParameters
+                    RadWindow.Confirm(new DialogParameters
                     {
-                        Content = "报告编号已存在，请修改编号",
+                        Content = "报告已存在，继续保存将覆盖已有数据，是否继续？",
+                        Closed = new EventHandler<WindowClosedEventArgs>(UpdateClosed),
+                        Header = "注意",
+                        CancelButtonContent = "否",
+                        OkButtonContent = "是"
 
                     });
                 }
                 
+            }
+        }
+        private void UpdateClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                var item = this.rpg.Item as 报告总表要素;
+                数据库处理类 cjkcl = new 数据库处理类();
+                if (cjkcl.UpdateZB(item))
+                {
+                    RadWindow rw = GetParentObject<RadWindow>(this, "");
+                    boolBS = true;
+                    rw.Close();
+
+                }
+                else
+                {
+                    RadWindow.Alert(new DialogParameters
+                    {
+                        Content = "数据库新增失败，请重试",
+
+                    });
+                }
             }
         }
         private void CancelConfirmClosed(object sender, WindowClosedEventArgs e)

@@ -167,7 +167,7 @@ namespace fangleinew
 
             }
         }
-        private double high;
+        private double high=-1;
         [Display(Description = "高度，填写负数则生成报告时为/", GroupName = "02.建筑物",Order =9)]
         public double 高度
         {
@@ -179,7 +179,7 @@ namespace fangleinew
 
             }
         }
-        private double mianji1;
+        private double mianji1 = -1;
         [Display(Description = "面积1，填写负数则生成报告时为/", GroupName = "02.建筑物", Order = 10)]
         public double 面积1
         {
@@ -191,7 +191,7 @@ namespace fangleinew
 
             }
         }
-        private double mianji2;
+        private double mianji2 = -1;
         [Display(Description = "面积2，填写负数则生成报告时为/", GroupName = "02.建筑物", Order = 11)]
         public double 面积2
         {
@@ -202,7 +202,7 @@ namespace fangleinew
                 this.OnPropertyChanged("面积2");
             }
         }
-        private int cengshu1;
+        private int cengshu1 = -1;
         [Display(Description = "地上层数，填写负数则生成报告时为/", GroupName = "02.建筑物", Order = 12)]
         public int 地上层数
         {
@@ -217,7 +217,7 @@ namespace fangleinew
                
             }
         }
-        private int cengshu2;
+        private int cengshu2 = -1;
         [Display(Description = "地下层数，填写负数则生成报告时为/", GroupName = "02.建筑物", Order = 13)]
         public int 地下层数
         {
@@ -243,7 +243,7 @@ namespace fangleinew
 
         }
 
-        private yongtuEnum yongtu;
+        private yongtuEnum yongtu= yongtuEnum.其他;
         [Display(Description = "主要用途", GroupName = "02.建筑物", Order = 14)]
         public yongtuEnum 主要用途
         {
@@ -268,7 +268,7 @@ namespace fangleinew
 
 
 
-        private fangleiLBEnum fangleiLB;
+        private fangleiLBEnum fangleiLB= fangleiLBEnum.一类;
         [Display(Description = "请选择防雷类别", GroupName = "02.建筑物", Order = 15)]
         public fangleiLBEnum 防雷类别
         {
@@ -1156,7 +1156,7 @@ namespace fangleinew
 
             }
         }
-        private string bh;
+        private string bh="";
         [Display(Description = "编号，一般自动生成，不修改", GroupName = "09.其他信息", Order = 100)]
         public string 编号
         {
@@ -1187,7 +1187,7 @@ namespace fangleinew
             }
         }
        
-        private string bgbh;
+        private string bgbh="";
         [Display(Description = "所属检测报告的编号，一般自动生成，不修改", GroupName = "09.其他信息", Order = 103)]
         public string 报告编号
         {

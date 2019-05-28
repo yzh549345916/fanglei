@@ -127,7 +127,7 @@ namespace 表格分层
         {
             this.name = name;
             this.fbid = fbid;
-            this.zbid = fbid;
+            this.zbid = zbid;
             this.mydate = mydate;
             this.fenLei = fenLei;
         }

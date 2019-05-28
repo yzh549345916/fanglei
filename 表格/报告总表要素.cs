@@ -10,7 +10,7 @@ namespace fangleinew
 {
     public class 报告总表要素 : IDataErrorInfo, INotifyPropertyChanged
     {
-        private string bh;
+        private string bh="";
         [Display(Description = "编号", GroupName = "01.基本信息",Order =1)]
         public string 编号
         {
@@ -25,7 +25,7 @@ namespace fangleinew
                 
             }
         }
-        private string name;
+        private string name = "";
         [Display(Description = "受检单位名称", GroupName = "01.基本信息", Order = 2)]
         public string 受检单位名称
         {
@@ -40,7 +40,7 @@ namespace fangleinew
 
             }
         }
-        private string address;
+        private string address = "";
         [Display(Description = "地址", GroupName = "01.基本信息", Order = 3)]
         public string 地址
         {
@@ -55,7 +55,7 @@ namespace fangleinew
                 
             }
         }
-        private string lxbm;
+        private string lxbm = "";
         [Display(Description = "联系部门", GroupName = "01.基本信息", Order = 4)]
         public string 联系部门
         {
@@ -70,7 +70,7 @@ namespace fangleinew
 
             }
         }
-        private string fzPeople;
+        private string fzPeople = "";
         [Display(Description = "负责人", GroupName = "01.基本信息", Order = 5)]
         public string 负责人
         {
@@ -85,7 +85,7 @@ namespace fangleinew
                 
             }
         }
-        private string phoneNum;
+        private string phoneNum = "";
         [Display(Description = "电话", GroupName = "01.基本信息", Order = 6)]
         public string 电话
         {
@@ -100,7 +100,7 @@ namespace fangleinew
                 
             }
         }
-        private string youbian;
+        private string youbian = "";
         [Display(Description = "邮编", GroupName = "01.基本信息", Order = 7)]
         public string 邮编
         {
@@ -115,7 +115,7 @@ namespace fangleinew
 
             }
         }
-        private DateTime startDateTime;
+        private DateTime startDateTime=DateTime.Now;
         [Display(Description = "检测开始日期", GroupName = "01.基本信息", Order = 8)]
         public DateTime 检测开始日期
         {
@@ -130,7 +130,7 @@ namespace fangleinew
 
             }
         }
-        private DateTime endDateTime;
+        private DateTime endDateTime = DateTime.Now;
         [Display(Description = "检测结束日期", GroupName = "01.基本信息", Order = 9)]
         public DateTime 检测结束日期
         {
@@ -145,7 +145,7 @@ namespace fangleinew
 
             }
         }
-        private DateTime nextDateTime;
+        private DateTime nextDateTime = DateTime.Now.AddYears(1).AddDays(-1);
         [Display(Description = "下次检测日期", GroupName = "01.基本信息", Order = 10)]
         public DateTime 下次检测日期
         {
@@ -160,7 +160,7 @@ namespace fangleinew
 
             }
         }
-        private string yqList;
+        private string yqList="";
         [Display(Description = "仪器列表", GroupName = "01.基本信息", Order = 11)]
         public string 仪器列表
         {
@@ -176,7 +176,7 @@ namespace fangleinew
             }
         }
 
-        private string fbList;
+        private string fbList = "";
         [Display(Description = "分表编号", GroupName = "02.其他", Order = 12)]
         public string 分表编号
         {
@@ -191,7 +191,7 @@ namespace fangleinew
                 
             }
         }
-        private int pagetNum;
+        private int pagetNum =1;
         [Display(Description = "报告页数，一般自动生成，不修改", GroupName = "02.其他", Order = 13)]
         public int 报告页数
         {

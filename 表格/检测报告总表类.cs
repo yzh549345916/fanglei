@@ -223,38 +223,29 @@ namespace 表格分层
             数据库处理类 sjkcl = new 数据库处理类();
             foreach (检测报告总表类 zb in sjkcl.getZB())
             {
+                List<检测报告分表类> fbLists = sjkcl.GetALLFBListbyZB(zb.Zbid);
+                foreach(var fbl in fbLists)
+                {
+                    zb.JcbgFbs.Add(fbl);
+                }
                 zbs.Add(zb);
             }
-           
-             ;
-            //// Liverpool
-            //zb = new 检测报告总表类("000001",DateTime.Now.AddDays(-3), DateTime.Now.AddDays(-1), DateTime.Now.AddYears(1),"火星","宇宙","办公室213","孙子","110","空空如也");
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表1","10000001","10210",DateTime.Now,"建筑物","帅哥","傻子","愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表2", "10000002", "10210", DateTime.Now, "建筑物", "帅哥", "傻子", "愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表3", "10000003", "10210", DateTime.Now.AddDays(1), "导弹", "帅哥2", "傻子2", "愣子2"));
-            //zbs.Add(zb);
 
-            //// Manchester Utd.
-            //zb = new 检测报告总表类("000002", DateTime.Now.AddDays(-2), DateTime.Now.AddDays(1), DateTime.Now.AddYears(2), "火星", "宇宙", "办公室250", "孙子", "110", "空空如也");
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表5", "10000002", "10212", DateTime.Now, "建筑物", "帅哥", "傻子", "愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表6", "10000003", "10212", DateTime.Now, "核潜艇", "帅哥", "傻子", "愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表7", "10000004", "10212", DateTime.Now.AddDays(1), "导弹", "帅哥2", "傻子2", "愣子2"));
-            //zbs.Add(zb);
+            
 
-            //// Chelsea
-            //zb = new 检测报告总表类("000001", DateTime.Now.AddDays(-3), DateTime.Now.AddDays(-1), DateTime.Now.AddYears(1), "火星", "宇宙", "办公室213", "孙子", "119", "空空如也");
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表1", "10000001", "10210", DateTime.Now, "建筑物"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表2", "10000002", "10210", DateTime.Now, "建筑物", "帅哥", "傻子", "愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("分表3", "10000003", "10210", DateTime.Now.AddDays(1), "导弹", "帅哥2", "傻子2", "愣子2"));
-            //zbs.Add(zb);
+            return zbs;
+        }
 
-            //// Arsenal
-            //zb = new 检测报告总表类("000001", DateTime.Now.AddDays(-3), DateTime.Now.AddDays(-1), DateTime.Now.AddYears(1), "火星", "宇宙", "办公室213", "孙子", "120", "空空如也");
-            //zb.JcbgFbs.Add(new 检测报告分表类("表1", "10000001", "10210", DateTime.Now, "月球", "帅哥", "傻子", "愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("表2", "10000002", "10210", DateTime.Now, "核弹", "帅哥", "傻子", "愣子"));
-            //zb.JcbgFbs.Add(new 检测报告分表类("表3", "10000003", "10210", DateTime.Now.AddDays(1), "导弹", "帅哥2", "傻子2", "愣子2"));
-            //zbs.Add(zb);
-
+        public static ObservableCollection<检测报告总表类> updateZbs(ObservableCollection<检测报告总表类> zbs,string bh)
+        {
+            int count = zbs.IndexOf((zbs.Where(y => y.Zbid == bh).First()));
+            zbs[count].JcbgFbs.Clear();
+            数据库处理类 sjkcl = new 数据库处理类();
+            List<检测报告分表类> fbLists = sjkcl.GetALLFBListbyZB(bh);
+            foreach (var fbl in fbLists)
+            {
+                zbs[count].JcbgFbs.Add(fbl);
+            }
             return zbs;
         }
 

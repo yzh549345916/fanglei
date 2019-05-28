@@ -26,6 +26,7 @@ namespace fangleinew
     /// </summary>
     public partial class PropertyGrid1 : UserControl
     {
+        public bool boolBS = false;
         public 报告总表要素 _zbys=new 报告总表要素()
         {
             仪器列表="测试仪器"
@@ -45,16 +46,27 @@ namespace fangleinew
 
             };
         }
-        public PropertyGrid1(报告总表要素 zbys)
+        public PropertyGrid1(报告总表要素 zbys,string jzwid)
         {
             InitializeComponent();
             rpg.AutoGeneratingPropertyDefinition += new EventHandler<Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs>(RpgAutoGeneratingPropertyDefinition);
             _zbys = zbys;
             rpg.Item = new 建筑物防雷装置要素()
             {
-                
-
+                编号 = jzwid,
+                地址= zbys.地址,
+                项目名称= "",
+                电话= zbys.电话,
+                联系人= zbys.负责人,
+                报告编号=zbys.编号
             };
+        }
+        public PropertyGrid1(报告总表要素 zbys, 建筑物防雷装置要素 jzwys)
+        {
+            InitializeComponent();
+            rpg.AutoGeneratingPropertyDefinition += new EventHandler<Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs>(RpgAutoGeneratingPropertyDefinition);
+            _zbys = zbys;
+            rpg.Item = jzwys;
         }
         void RpgAutoGeneratingPropertyDefinition(object sender, Telerik.Windows.Controls.Data.PropertyGrid.AutoGeneratingPropertyDefinitionEventArgs e)
         {
@@ -437,7 +449,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as SPD检测表选择)._people;
-            if (peop.Trim().Length > 0)
+            if (peop != null && peop.Trim().Length > 0)
                 item.Jzwspd = peop;
             int count = 1;
             if (item.Jzwxb.Length > 1)
@@ -451,7 +463,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 建筑物防雷装置检测表续选择)._people;
-            if (peop.Trim().Length > 0)
+            if (peop!=null&&peop.Trim().Length > 0)
                 item.Jzwxb = peop;
             int count = 1;
             if (item.Jzwxb.Length > 1)
@@ -466,7 +478,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 人员选择)._people;
-            if(peop.Trim().Length>0)
+            if(peop != null && peop.Trim().Length>0)
              item.检测员 = peop;
             
         }
@@ -474,7 +486,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 人员选择)._people;
-            if (peop.Trim().Length > 0)
+            if (peop != null && peop.Trim().Length > 0)
                 item.技术负责人 = peop;
 
         }
@@ -482,7 +494,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 人员选择)._people;
-            if (peop.Trim().Length > 0)
+            if (peop != null && peop.Trim().Length > 0)
                 item.校核人 = peop;
 
         }
@@ -491,7 +503,7 @@ namespace fangleinew
         {
             var item = this.rpg.Item as 建筑物防雷装置要素;
             string peop = ((sender as RadWindow).Content as 标准选择)._bz;
-            if (peop.Trim().Length > 2)
+            if (peop != null&&peop.Trim().Length > 2)
                 item.依据标准 = peop;
 
         }
@@ -515,13 +527,29 @@ namespace fangleinew
             {
                 var item = this.rpg.Item as 建筑物防雷装置要素;
                 数据库处理类 cjkcl = new 数据库处理类();
-                if (!cjkcl.ExistsJZWBX(item.编号))
+                if (!cjkcl.ExistsJZWFB(item.编号))
                 {
 
-                    if (cjkcl.AddJZWBX(item))
+                    if (cjkcl.AddJZWFB(item))
                     {
-                        RadWindow rw = GetParentObject<RadWindow>(this, "");
+                        RadWindow rw = GetParentClss.GetParentObject<RadWindow>(this);
                         boolBS = true;
+                        if(!_zbys.分表编号.Contains(item.编号))
+                        {
+                            if(_zbys.分表编号.Trim().Length>2)
+                            {
+                                _zbys.分表编号 = _zbys.分表编号 + ',' + item.编号;
+                            }
+                            else
+                            {
+                                _zbys.分表编号 = item.编号;
+                            }
+                            _zbys.报告页数 += item.PageNum;
+                        }
+                        else
+                        {
+                            _zbys.报告页数 = cjkcl.GetPagebyZB(_zbys.编号);
+                        }
                         rw.Close();
 
                     }
@@ -539,20 +567,79 @@ namespace fangleinew
                 {
                     RadWindow.Confirm(new DialogParameters
                     {
-                        Content = "建筑物表续编号已存在，继续保存将覆盖已有数据，是否继续？",
+                        Content = "建筑物表编号已存在，继续保存将覆盖已有数据，是否继续？",
                         Closed = new EventHandler<WindowClosedEventArgs>(UpdateClosed),
                         Header = "注意",
                         CancelButtonContent = "否",
-                        OkButtonContent = "是"
+                        OkButtonContent = "是",
 
                     });
                 }
 
             }
         }
+        private void UpdateClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                var item = this.rpg.Item as 建筑物防雷装置要素;
+                数据库处理类 cjkcl = new 数据库处理类();
+                if (cjkcl.UpdateJZWFB(item))
+                {
+                    
+                    RadWindow rw = GetParentClss.GetParentObject<RadWindow>(this);
+                    boolBS = true;
+                    if (!_zbys.分表编号.Contains(item.编号))
+                    {
+                        if (_zbys.分表编号.Trim().Length > 2)
+                        {
+                            _zbys.分表编号 = _zbys.分表编号 + ',' + item.编号;
+                        }
+                        else
+                        {
+                            _zbys.分表编号 = item.编号;
+                        }
+                        _zbys.报告页数 += item.PageNum;
+                    }
+                    else
+                    {
+                        _zbys.报告页数 = cjkcl.GetPagebyZB(_zbys.编号);
+                    }
+                    rw.Close();
 
+                }
+                else
+                {
+                    RadWindow.Alert(new DialogParameters
+                    {
+                        Content = "数据库新增失败，请重试",
+
+                    });
+                }
+            }
+        }
+        private void CancelConfirmClosed(object sender, WindowClosedEventArgs e)
+        {
+            if (e.DialogResult == true)
+            {
+                boolBS = false;
+                RadWindow rw = GetParentClss.GetParentObject<RadWindow>(this);
+                rw.Close();
+            }
+        }
         private void CancelBtu_Click(object sender, RoutedEventArgs e)
         {
+            string confirmText = "是否放弃已编辑的数据?";
+            RadWindow.Confirm(new DialogParameters
+            {
+                Content = confirmText,
+                Closed = new EventHandler<WindowClosedEventArgs>(CancelConfirmClosed),
+                Header = "注意",
+                CancelButtonContent = "否",
+                OkButtonContent = "是"
+
+            });
+
 
         }
     }

@@ -6,19 +6,19 @@
              xmlns:fangleinew="clr-namespace:fangleinew"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
         xmlns:my="clr-namespace:表格分层"
-             mc:Ignorable="d" >
+             mc:Ignorable="d">
     <UserControl.Resources>
         <my:MyGridData x:Key="MyGridData"/>
     </UserControl.Resources>
-    <Viewbox DataContext="{StaticResource MyGridData}"  Width="1320">
+    <Grid DataContext="{StaticResource MyGridData}"  >
         <StackPanel>
             <telerik:RadGridView x:Name="clubsGrid" SelectionChanged="clubsGrid_SelectionChanged"
-							 
+							 CanUserResizeRows="True" GroupRenderMode="Flat"
 							 AutoGenerateColumns="False"   
-                             IsReadOnly="False"
+                             IsReadOnly="True"
                              ItemsSource="{Binding JcbgZbs}"
-                             my:GridContextMenuBehavior.ContextMenu="{Binding ElementName=GridContextMenu}"
-							 Margin="0">
+                             CanUserFreezeColumns="False"
+                             my:GridContextMenuBehavior.ContextMenu="{Binding ElementName=GridContextMenu}" Margin="0" >
              
                 <telerik:RadContextMenu.ContextMenu>
                     <telerik:RadContextMenu x:Name="GridContextMenu" IconColumnWidth="18">
@@ -42,14 +42,16 @@
                 <telerik:RadGridView.HierarchyChildTemplate>
                     <DataTemplate>
                         <telerik:RadGridView Name="playersGrid" 
+                                             CanUserFreezeColumns="False"
 										 SelectionChanged="clubsGrid_SelectionChanged"
 										 ItemsSource="{Binding JcbgFbs}" 
+                                         ShowGroupPanel="False"
+                                         IsReadOnly="True"
 										 AutoGenerateColumns="False">
                             <telerik:RadGridView.Columns>
                                 <telerik:GridViewDataColumn Header="检测项目" DataMemberBinding="{Binding Name}"/>
                                 <telerik:GridViewDataColumn Header="检测类别" DataMemberBinding="{Binding FenLei}"/>
-                                <telerik:GridViewDataColumn Header="检测日期" DataMemberBinding="{Binding Mydate}" DataFormatString="{}{0:yyyy年MM月dd日}"/>
-                                <telerik:GridViewDataColumn Header="检测人员" DataMemberBinding="{Binding JcPeople}"/>
+                               <telerik:GridViewDataColumn Header="检测人员" DataMemberBinding="{Binding JcPeople}"/>
                                 <telerik:GridViewDataColumn Header="校核人员" DataMemberBinding="{Binding JhPeople}"/>
                                 <telerik:GridViewDataColumn Header="批准人员" DataMemberBinding="{Binding PzPeople}"/>
                             </telerik:RadGridView.Columns>
@@ -86,5 +88,5 @@
 
         </StackPanel>
 
-    </Viewbox>
+    </Grid>
 </UserControl>
